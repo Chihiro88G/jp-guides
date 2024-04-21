@@ -1,17 +1,12 @@
-import { Box } from '@mui/material';
 import * as React from 'react';
+
 import Title from '../Title';
+import SectionWrapper from '../SectionWrapper';
 
 export default function HomeTop() {
   return (
-    <Box
-      sx={{
-        display: 'block',
-        height: '50vh',
-        backgroundColor: 'yellowgreen'
-      }} 
-    >
+    <SectionWrapper bgColor='yellowgreen' height='50vh' >
       <Title>Top</Title>
-    </Box>
+    </SectionWrapper>
   )
 }

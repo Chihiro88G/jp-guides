@@ -3,15 +3,11 @@ import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 import Title from '../Title';
 import TourCard from '../TourCard';
+import SectionWrapper from '../SectionWrapper';
 
 export default function PopularTours() {
   return (
-    <Box 
-      sx={{
-        display: 'block',
-        backgroundColor: 'beige'
-      }}
-    >
+    <SectionWrapper bgColor='beige' >
       <Title>Popular Tours</Title>
       <Box 
         sx={{ 
@@ -29,6 +25,6 @@ export default function PopularTours() {
           <TourCard />
       </Box>
       {/* <Typography>Browse all tours...</Typography> */}
-    </Box>
+    </SectionWrapper>
   )
 }

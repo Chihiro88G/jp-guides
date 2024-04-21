@@ -6,7 +6,7 @@ import TravelTips from '../components/home/TravelTips';
 
 export default function Home() {
   return (
-    <Box maxWidth="lg" style={{ background: '#f2f6fc', height: '200vh', margin: '0 auto' }} >
+    <Box style={{ background: '#f2f6fc', height: '200vh', margin: '0 auto' }} >
       <HomeTop />
       <PopularTours />
       <TravelTips />
