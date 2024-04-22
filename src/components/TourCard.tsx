@@ -13,7 +13,7 @@ export default function TourCard() {
         // minWidth: '30%',
         width: '31%',
         margin: '10px',
-        borderRadius: '10px'
+        borderRadius: '10px',
       }}
     >
       <CardMedia
