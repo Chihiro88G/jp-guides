@@ -6,7 +6,7 @@ import TravelTips from '../components/home/TravelTips';
 
 export default function Home() {
   return (
-    <Box style={{ background: '#f2f6fc', height: '200vh', margin: '0 auto' }} >
+    <Box style={{ height: '200vh', margin: '0 auto' }} >
       <HomeTop />
       <PopularTours />
       <TravelTips />

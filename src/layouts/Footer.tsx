@@ -23,7 +23,7 @@ export default function Footer() {
               justifyContent: 'center',
             }}
             >
-            <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Logo />
             </Box>
             <Box sx={{ display: 'flex' }}>

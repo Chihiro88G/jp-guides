@@ -19,6 +19,7 @@ export default function SectionWrapper(props: SectionWrapperProps) {
           height: `${height ? height : ''}`,
           backgroundColor: '',
           margin: '0 auto',
+          padding: '10px',
         }} 
         maxWidth="lg"
       >
