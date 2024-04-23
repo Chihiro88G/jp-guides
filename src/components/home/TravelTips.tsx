@@ -9,7 +9,7 @@ export default function TravelTips() {
   return (
     <SectionWrapper>
       <Title>Travel Tips for Japan</Title>
-      <Box sx={{ width: '80%', margin: '0 auto' }}>
+      <Box sx={{ width: '80%', padding: '40px', margin: '0 auto' }}>
         <AccordionItem 
           topSummary='Accordion 1'
           details='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse

@@ -1,30 +1,24 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../components/Logo';
 import UserIcon from '../components/UserIcon';
 import { getPages } from '../utils/getPages';
+import NavContainer from '../components/NavContainer';
 
 export default function MobileNavBar() {
   return (
-    <AppBar position="static" style={{ boxShadow: 'none'}}>
-      <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <PageMenu />
-          <Box sx={{ display: 'flex', m: '0 auto' }}>
-            <Logo />
-          </Box>
-          <UserIcon />
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <NavContainer component='header'>
+      <PageMenu />
+      <Box sx={{ display: 'flex', m: '0 auto' }}>
+        <Logo />
+      </Box>
+      <UserIcon />
+    </NavContainer>
   );
 }
 
