@@ -28,10 +28,10 @@ export default function Footer() {
         <Box sx={{ display: 'flex' }}>
           {getPages().map((page) => (
             <Button
-              key={page}
+              key={page.name}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              {page}
+              {page.name}
             </Button>
           ))}
         </Box>

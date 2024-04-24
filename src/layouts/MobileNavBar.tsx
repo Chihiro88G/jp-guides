@@ -35,40 +35,40 @@ function PageMenu() {
 
   return (
     <Box>
-    <IconButton
-      size="large"
-      aria-label="account of current user"
-      aria-controls="menu-appbar"
-      aria-haspopup="true"
-      onClick={handleOpenNavMenu}
-      color="inherit"
-    >
-      <MenuIcon />
-    </IconButton>
-    <Menu
-      id="menu-appbar"
-      anchorEl={anchorElNav}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
-      }}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      open={Boolean(anchorElNav)}
-      onClose={handleCloseNavMenu}
-      sx={{
-        display: 'block',
-      }}
-    >
-      {getPages().map((page) => (
-        <MenuItem key={page} onClick={handleCloseNavMenu}>
-          <Typography textAlign="center">{page}</Typography>
-        </MenuItem>
-      ))}
-    </Menu>
-  </Box>
-);
+      <IconButton
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleOpenNavMenu}
+        color="inherit"
+      >
+        <MenuIcon />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        open={Boolean(anchorElNav)}
+        onClose={handleCloseNavMenu}
+        sx={{
+          display: 'block',
+        }}
+      >
+        {getPages().map((page) => (
+          <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+            <Typography textAlign="center">{page.name}</Typography>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
 }
