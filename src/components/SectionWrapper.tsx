@@ -5,19 +5,26 @@ import { Box } from '@mui/material';
 type SectionWrapperProps = {
   children: ReactNode
   bgColor?: string;
+  bgImage?: string;
   height?: string;
 };
 
 export default function SectionWrapper(props: SectionWrapperProps) {
-  const { children, bgColor, height } = props; 
+  const { children, bgColor, bgImage, height } = props; 
 
   return (
-    <Box sx={{ backgroundColor: `${bgColor ? bgColor : ''}` }}>
+    <Box
+      sx={{
+        backgroundColor: `${bgColor ? bgColor : ''}`,
+        backgroundImage: `${bgImage ? `url(${bgImage})` : ''}`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}
+    >
       <Box
         sx={{
           display: 'block',
           height: `${height ? height : ''}`,
-          backgroundColor: '',
           margin: '0 auto',
           padding: '10px',
         }} 
