@@ -1,15 +1,13 @@
 import React from 'react';
-
-import { Typography } from '@mui/material';
+import SectionWrapper from '../SectionWrapper';
 import Title from '../Title';
 import TourCard from '../TourCard';
-import SectionWrapper from '../SectionWrapper';
 import TourCards from '../TourCards';
 
-export default function PopularTours() {
+export default function ToursList() {
   return (
-    <SectionWrapper bgColor='beige' >
-      <Title>Popular Tours</Title>
+    <SectionWrapper bgColor='beige'>
+      <Title>Tours</Title>
       <TourCards>
         <TourCard />
         <TourCard />
@@ -18,7 +16,6 @@ export default function PopularTours() {
         <TourCard />
         <TourCard />
       </TourCards>
-      {/* <Typography>Browse all tours...</Typography> */}
     </SectionWrapper>
   )
 }

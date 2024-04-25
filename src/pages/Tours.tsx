@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
+import ToursTop from '../components/tours/ToursTop';
+import ToursList from '../components/tours/ToursList';
 
 export default function Tours() {
   return (
     <Fragment>
-      TOURS PAGE
+      <ToursTop />
+      <ToursList />
     </Fragment>
   )
 }

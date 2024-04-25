@@ -11,7 +11,7 @@ export default function HomeTop() {
         color='white'
         sx={{ width: '35%', padding: '20px', fontFamily: 'system-ui', }}
       >
-        FIND YOUR BEST TOURS
+        GET YOUR BEST TOURS
       </Typography>
       <Typography
         variant="h6"
