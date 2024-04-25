@@ -1,16 +1,19 @@
 import * as React from 'react';
 
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import LikeButton from './LikeButton';
 
-export default function TourCard() {
+type TourCardProps = {
+  cardId: number;
+}
+
+export default function TourCard({ cardId }: TourCardProps) {
   const randInt = () => 100 + Math.floor(Math.random() * 100);
   const imgUrl = `https://source.unsplash.com/random/${randInt()} x ${randInt()}?japan`;
 
   return (
     <Card
-      sx={{ 
-        // maxWidth: '300',
-        // minWidth: '30%',
+      sx={{
         width: '31%',
         margin: '10px',
         borderRadius: '10px',
@@ -29,6 +32,7 @@ export default function TourCard() {
         <Typography variant="body2" color="text.secondary">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, accusantium.
         </Typography>
+        <LikeButton cardId={cardId} />
       </CardContent>
       <CardActions>
         <Button size="small">View Tour</Button>

@@ -9,12 +9,12 @@ export default function ToursList() {
     <SectionWrapper bgColor='beige'>
       <Title>Tours</Title>
       <TourCards>
-        <TourCard />
-        <TourCard />
-        <TourCard />
-        <TourCard />
-        <TourCard />
-        <TourCard />
+        <TourCard cardId={0}/>
+        <TourCard cardId={1}/>
+        <TourCard cardId={2}/>
+        <TourCard cardId={3}/>
+        <TourCard cardId={4}/>
+        <TourCard cardId={5}/>
       </TourCards>
     </SectionWrapper>
   )

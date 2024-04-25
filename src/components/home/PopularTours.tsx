@@ -11,12 +11,12 @@ export default function PopularTours() {
     <SectionWrapper bgColor='beige' >
       <Title>Popular Tours</Title>
       <TourCards>
-        <TourCard />
-        <TourCard />
-        <TourCard />
-        <TourCard />
-        <TourCard />
-        <TourCard />
+        <TourCard cardId={0}/>
+        <TourCard cardId={1}/>
+        <TourCard cardId={2}/>
+        <TourCard cardId={3}/>
+        <TourCard cardId={4}/>
+        <TourCard cardId={5}/>
       </TourCards>
       {/* <Typography>Browse all tours...</Typography> */}
     </SectionWrapper>
