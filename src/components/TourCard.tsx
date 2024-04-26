@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import LikeButton from './LikeButton';
+import AddToCartButton from './AddToCartButton';
 
 type TourCardProps = {
   cardId: number;
@@ -34,8 +35,9 @@ export default function TourCard({ cardId }: TourCardProps) {
         </Typography>
         <LikeButton cardId={cardId} />
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'space-between' }}>
         <Button size="small">View Tour</Button>
+        <AddToCartButton cardId={cardId} />
       </CardActions>
     </Card>
     )

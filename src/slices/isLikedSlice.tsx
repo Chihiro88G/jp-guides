@@ -4,7 +4,7 @@ const initialState = {
   isLiked: {},
 }
 
-const likeCountSlice = createSlice({
+const isLikedSlice = createSlice({
   name: 'isLiked',
   initialState,
   reducers: {
@@ -19,5 +19,5 @@ const likeCountSlice = createSlice({
   },
 });
 
-export const { setLiked, setUnliked } = likeCountSlice.actions;
-export default likeCountSlice.reducer;
+export const { setLiked, setUnliked } = isLikedSlice.actions;
+export default isLikedSlice.reducer;
