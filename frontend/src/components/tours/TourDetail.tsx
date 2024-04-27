@@ -9,6 +9,7 @@ import TourDetailItem from './TourDetailItem';
 import ReviewStars from './ReviewStars';
 import LikeButton from '../LikeButton';
 import AddToCartButton from '../AddToCartButton';
+import StyledText from '../StyledText';
 
 export default function TourDetail() {
   const { tourId } = useParams();
@@ -18,7 +19,7 @@ export default function TourDetail() {
     <SectionWrapper bgColor='beige' >
       <PageTitle>TOUR NAME {tourId}</PageTitle>
       <Box sx={{ padding: '0 25px' }}>
-        <Typography sx={{ fontWeight: 'bold' }} >XX days</Typography>
+        <StyledText bold>XX days</StyledText>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <TourDetailItem>
             <Typography>Group size</Typography>
@@ -42,9 +43,14 @@ export default function TourDetail() {
           IMAGES
         </Box>
 
-        <Title>Overview</Title>
-        <Box sx={{ height: '50vh', backgroundColor: 'pink' }}>
-          OVERVIEW
+        <Box sx={{ padding: '25px' }}>
+          <Title>Overview</Title>
+          <StyledText bold>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti, esse.</StyledText>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi ea incidunt repellendus laboriosam, possimus odio veniam. Cupiditate ipsa magni doloremque sequi officia distinctio tempore suscipit repellendus architecto est accusamus, maxime quo odio aliquid quam, culpa sunt tenetur itaque deleniti et odit eius alias quaerat expedita? Cumque dolores corrupti excepturi quis!
+        </Box>
+        <Box sx={{ padding: '25px' }}>
+          <Title>Itenerary</Title>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi ea incidunt repellendus laboriosam, possimus odio veniam. Cupiditate ipsa magni doloremque sequi officia distinctio tempore suscipit repellendus architecto est accusamus, maxime quo odio aliquid quam, culpa sunt tenetur itaque deleniti et odit eius alias quaerat expedita? Cumque dolores corrupti excepturi quis!
         </Box>
       </Box>
 
