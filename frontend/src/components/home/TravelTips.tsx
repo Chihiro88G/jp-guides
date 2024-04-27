@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Title from '../Title';
 import SectionWrapper from '../SectionWrapper';
@@ -6,6 +6,12 @@ import AccordionItem from './AccordionItem';
 import { Box } from '@mui/material';
 
 export default function TravelTips() {
+  useEffect(() => {
+    fetch('http://localhost:8000/')
+    .then(res => res.json())
+    .then(data => console.log(data));
+  });
+  
   return (
     <SectionWrapper>
       <Title>Travel Tips for Japan</Title>
