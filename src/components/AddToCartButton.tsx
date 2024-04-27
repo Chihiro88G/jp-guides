@@ -7,21 +7,21 @@ import { setAddedToCart, setRemovedFromCart } from '../slices/isInCartSlice';
 import { Button } from '@mui/material';
 
 type LikeButtonTypes = {
-  cardId: number;
+  tourId: number;
 }
 
-export default function AddToCartButton({ cardId }: LikeButtonTypes) {
-  const isInCart = useSelector((state: any) => state.isInCart[cardId]);
+export default function AddToCartButton({ tourId }: LikeButtonTypes) {
+  const isInCart = useSelector((state: any) => state.isInCart[tourId]);
 
   const dispatch = useDispatch();
 
   const handleCart = () => {
     if (isInCart) {
       dispatch(decrementCartItem());
-      dispatch(setRemovedFromCart(cardId));
+      dispatch(setRemovedFromCart(tourId));
     } else {
       dispatch(incrementCartItem())
-      dispatch(setAddedToCart(cardId));
+      dispatch(setAddedToCart(tourId));
     }
   }
 

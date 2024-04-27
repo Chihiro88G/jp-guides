@@ -9,21 +9,22 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 type LikeButtonTypes = {
-  cardId: number;
+  tourId: number;
+  isDetail?: boolean;
 }
 
-export default function LikeButton({ cardId }: LikeButtonTypes) {
-  const isLiked = useSelector((state: any) => state.isLiked[cardId]);
+export default function LikeButton({ tourId, isDetail }: LikeButtonTypes) {
+  const isLiked = useSelector((state: any) => state.isLiked[tourId]);
 
   const dispatch = useDispatch();
 
   const handleLike = () => {
     if (isLiked) {
       dispatch(decrementLike());
-      dispatch(setUnliked(cardId));
+      dispatch(setUnliked(tourId));
     } else {
       dispatch(incrementLike())
-      dispatch(setLiked(cardId));
+      dispatch(setLiked(tourId));
     }
   }
 
@@ -34,8 +35,8 @@ export default function LikeButton({ cardId }: LikeButtonTypes) {
       onClick={() => handleLike()}
       sx={{
         position: 'relarive',
-        bottom: '90px',
-        left: '297px',
+        bottom: isDetail ? '-15px' : '90px',
+        left: isDetail ? '0' : '297px',
       }}
     >
       {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}

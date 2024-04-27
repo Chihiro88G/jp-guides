@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import LikeButton from './LikeButton';
 import AddToCartButton from './AddToCartButton';
+import { useNavigate } from 'react-router-dom';
 
 type TourCardProps = {
   cardId: number;
@@ -18,6 +19,9 @@ export default function TourCard({ cardId }: TourCardProps) {
         width: '31%',
         margin: '10px',
         borderRadius: '10px',
+        ':hover': {
+          boxShadow: 5,
+        },
       }}
     >
       <CardMedia
@@ -33,12 +37,27 @@ export default function TourCard({ cardId }: TourCardProps) {
         <Typography variant="body2" color="text.secondary">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, accusantium.
         </Typography>
-        <LikeButton cardId={cardId} />
+        <LikeButton tourId={cardId} />
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between' }}>
-        <Button size="small">View Tour</Button>
-        <AddToCartButton cardId={cardId} />
+        <ViewTourButton tourId={cardId} />
+        <AddToCartButton tourId={cardId} />
       </CardActions>
     </Card>
     )
+}
+
+type ViewTourButtonProps = {
+  tourId: number;
+}
+
+function ViewTourButton({ tourId }: ViewTourButtonProps) {
+  const navigate = useNavigate();
+  const handleViewTour = () => {
+    navigate(`/tours/${tourId}`);
+  };
+
+  return (
+    <Button size="small" onClick={() => handleViewTour()}>View Tour</Button>
+  );
 }
