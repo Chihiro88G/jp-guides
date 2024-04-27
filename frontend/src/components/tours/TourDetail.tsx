@@ -1,9 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+import { Box, Typography } from '@mui/material';
+
 import SectionWrapper from '../SectionWrapper';
 import PageTitle from '../PageTitle';
-import { Box, Typography } from '@mui/material';
 import Title from '../Title';
 import TourDetailItem from './TourDetailItem';
 import ReviewStars from './ReviewStars';
