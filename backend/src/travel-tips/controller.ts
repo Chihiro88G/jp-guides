@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
+import * as service from './service';
 
 class TravelTipsController {
 
   async get(req: Request, res: Response): Promise<any> {
-    res.send('get travel tips')
-    console.log('inside get travel tips')
+    const result = await service.findAll();
+    res.send(result);
   }
 }
 
