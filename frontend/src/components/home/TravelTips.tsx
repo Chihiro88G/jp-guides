@@ -10,7 +10,7 @@ export default function TravelTips() {
   const [data, setData] = useState<any>();
   
   useEffect(() => {
-    fetch('http://localhost:8000/travel-tips')
+    fetch(`${process.env.REACT_APP_API_URI}/travel-tips`)
     .then(res => res.json())
     .then(data => setData(data));
   });

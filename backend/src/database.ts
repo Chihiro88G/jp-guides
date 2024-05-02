@@ -17,12 +17,8 @@ async function getPool(): Promise<Pool> {
 }
 
 export default {
-  // async query(query: string, ...args: any[]): Promise<Result> {
-  //   return (await getPool()).query(query, [...(args || [])]);
-  // }
-
-  async query(query: string): Promise<any> {
-    return (await getPool()).query(query);
+  async query(query: string, ...args: any[]): Promise<Result> {
+    return (await getPool()).query(query, [...(args || [])]);
   }
 }
 
