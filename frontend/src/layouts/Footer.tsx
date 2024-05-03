@@ -1,14 +1,15 @@
 import React from "react";
 
-import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
+
 import Logo from "../components/Logo";
 import { getPages } from "../utils/getPages";
 import NavContainer from "../components/NavContainer";
+import PageButton from "./PageButton";
 
 export default function Footer() {
   return (
@@ -27,13 +28,11 @@ export default function Footer() {
         </Box>
         <Box sx={{ display: 'flex' }}>
           {getPages().map((page) => (
-            <Button
-              key={page.name}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              {page.name}
-            </Button>
-          ))}
+          <PageButton 
+            pageName={page.name}
+            path={page.path}
+          />
+        ))}
         </Box>
         <Box sx={{ textAlign: "center" }}>
           <BottomNavigationAction label="Twitter" icon={<TwitterIcon />} />

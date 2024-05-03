@@ -34,9 +34,10 @@ export default function LikeButton({ tourId, isDetail }: LikeButtonTypes) {
       color='secondary'
       onClick={() => handleLike()}
       sx={{
-        position: 'relarive',
-        bottom: isDetail ? '-15px' : '90px',
-        left: isDetail ? '0' : '297px',
+        // position: 'relarive',
+        bottom: isDetail ? '-15px' : '5px',
+        left: isDetail ? '0' : '56%',
+        
       }}
     >
       {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}

@@ -8,7 +8,11 @@ type TourDetailItemProps = {
 
 export default function TourDetailItem({ children }: TourDetailItemProps) {
   return (
-    <Box sx={{ margin: '10px 0', width: '15%' }}>
+    <Box
+      sx={{ 
+        margin: '10px 0',
+        width: { xs: '100%', md: '15%'}
+      }}>
       {children}
     </Box>
   )

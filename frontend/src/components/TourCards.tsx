@@ -10,7 +10,7 @@ export default function TourCards({ children }: TourCardsProps) {
   return (
     <Box 
       sx={{ 
-        display: { xs: 'none', md: 'flex' },
+        display: { xs: 'block', md: 'flex' },
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: '10px',

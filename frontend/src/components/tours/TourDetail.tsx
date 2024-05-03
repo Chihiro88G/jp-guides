@@ -21,7 +21,10 @@ export default function TourDetail() {
       <PageTitle>TOUR NAME {tourId}</PageTitle>
       <Box sx={{ padding: '0 25px' }}>
         <StyledText bold>XX days</StyledText>
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <Box sx={{
+          display: { xs: 'block', md: 'flex' },
+          flexDirection: 'row'
+        }}>
           <TourDetailItem>
             <Typography>Group size</Typography>
             <Typography>YY - ZZ travelers</Typography>

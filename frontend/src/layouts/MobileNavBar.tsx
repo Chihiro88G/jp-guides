@@ -1,14 +1,16 @@
 import React from 'react';
+
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+
 import Logo from '../components/Logo';
 import UserIcon from '../components/UserIcon';
 import { getPages } from '../utils/getPages';
 import NavContainer from '../components/NavContainer';
+import PageButton from './PageButton';
 
 export default function MobileNavBar() {
   return (
@@ -65,7 +67,10 @@ function PageMenu() {
       >
         {getPages().map((page) => (
           <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">{page.name}</Typography>
+            <PageButton 
+              pageName={page.name}
+              path={page.path}
+            />
           </MenuItem>
         ))}
       </Menu>

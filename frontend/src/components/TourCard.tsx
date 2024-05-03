@@ -16,7 +16,7 @@ export default function TourCard({ cardId }: TourCardProps) {
   return (
     <Card
       sx={{
-        width: '31%',
+        width: { xs: 'inherit', md: '31%'},
         margin: '10px',
         borderRadius: '10px',
         ':hover': {
@@ -33,11 +33,11 @@ export default function TourCard({ cardId }: TourCardProps) {
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           Tour Name
+          <LikeButton tourId={cardId} />
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, accusantium.
         </Typography>
-        <LikeButton tourId={cardId} />
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between' }}>
         <ViewTourButton tourId={cardId} />

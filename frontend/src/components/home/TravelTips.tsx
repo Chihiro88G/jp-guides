@@ -20,7 +20,12 @@ export default function TravelTips() {
   return (
     <SectionWrapper>
       <Title>Travel Tips for Japan</Title>
-      <Box sx={{ width: '80%', padding: '40px', margin: '0 auto' }}>
+      <Box
+        sx={{
+          width: { xs: '100%', md: '80%'},
+          padding: '40px',
+          margin: '0 auto'
+        }}>
         {data.map((item: any) => (
           <AccordionItem
             key={item.title}
