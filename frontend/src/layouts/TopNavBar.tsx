@@ -21,6 +21,7 @@ export default function TopNavBar() {
           <PageButton 
             pageName={page.name}
             path={page.path}
+            key={page.name}
           />
         ))}
         <LikeCountIcon />

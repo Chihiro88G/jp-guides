@@ -31,6 +31,7 @@ export default function Footer() {
           <PageButton 
             pageName={page.name}
             path={page.path}
+            key={page.name}
           />
         ))}
         </Box>

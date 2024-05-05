@@ -13,7 +13,7 @@ export default function PageButton({ pageName, path }: PageButtonProps) {
 
   return (
     <Button
-      key={pageName}
+      // key={pageName}
       sx={{ 
         my: { xs: 0, md: 2},
         color: 'white',
