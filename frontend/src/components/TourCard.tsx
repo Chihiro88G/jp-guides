@@ -1,50 +1,34 @@
-import React from 'react';
-
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Button, CardActions, CardContent, Typography } from '@mui/material';
 import LikeButton from './LikeButton';
 import AddToCartButton from './AddToCartButton';
-import { useNavigate } from 'react-router-dom';
+import CardWithMedia from './CardWithMedia';
 
 type TourCardProps = {
-  cardId: number;
+  tourData: any;
 }
 
-export default function TourCard({ cardId }: TourCardProps) {
+export default function TourCard({ tourData }: TourCardProps) {
   const randInt = () => 100 + Math.floor(Math.random() * 100);
   const imgUrl = `https://source.unsplash.com/random/${randInt()} x ${randInt()}?japan`;
 
   return (
-    <Card
-      sx={{
-        width: { xs: 'inherit', md: '31%'},
-        margin: '10px',
-        borderRadius: '10px',
-        ':hover': {
-          boxShadow: 5,
-        },
-      }}
-    >
-      <CardMedia
-        component='img'
-        sx={{ height: 170 }}
-        image={imgUrl}
-        title="default image"
-      />
+    <CardWithMedia imgUrl={imgUrl}>
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          Tour Name
-          <LikeButton tourId={cardId} />
+        <Typography variant="body1" component="div">
+          {tourData.tour_name}
+          <LikeButton tourId={tourData.id} />
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, accusantium.
+          {tourData.overview_title}
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between' }}>
-        <ViewTourButton tourId={cardId} />
-        <AddToCartButton tourId={cardId} />
+        <ViewTourButton tourId={tourData.id} />
+        <AddToCartButton tourId={tourData.id} />
       </CardActions>
-    </Card>
-    )
+    </CardWithMedia>
+  )
 }
 
 type ViewTourButtonProps = {

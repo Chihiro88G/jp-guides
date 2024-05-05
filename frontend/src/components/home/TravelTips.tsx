@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-
 import Title from '../Title';
 import SectionWrapper from '../SectionWrapper';
 import AccordionItem from './AccordionItem';
+import TravelTipsWrapper from './TravelTipsWrapper';
 
 export default function TravelTips() {
   const [data, setData] = useState<any>();
@@ -13,19 +12,14 @@ export default function TravelTips() {
     fetch(`${process.env.REACT_APP_API_URI}/travel-tips`)
     .then(res => res.json())
     .then(data => setData(data));
-  });
+  }, []);
 
   if (!data) return <Box>No Travel Tips</Box>
   
   return (
     <SectionWrapper>
-      <Title>Travel Tips for Japan</Title>
-      <Box
-        sx={{
-          width: { xs: '100%', md: '80%'},
-          padding: '40px',
-          margin: '0 auto'
-        }}>
+      <TravelTipsWrapper>
+        <Title>Travel Tips for Japan</Title>
         {data.map((item: any) => (
           <AccordionItem
             key={item.title}
@@ -33,7 +27,7 @@ export default function TravelTips() {
             details={item.content}
           />
         ))}
-      </Box>
+      </TravelTipsWrapper>
     </SectionWrapper>
   )
 }

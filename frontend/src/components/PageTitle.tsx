@@ -6,10 +6,11 @@ type PageTitleProps = {
   children: ReactNode;
   variant?: 'h6';
   color?: string;
+  full?: boolean;
 }
 
 export default function PageTitle(props: PageTitleProps) {
-  const { children, variant, color,  } = props;
+  const { children, variant, color, full } = props;
   const isDesktop = useMediaQuery('(min-width: 960px)');
 
   return (
@@ -17,7 +18,7 @@ export default function PageTitle(props: PageTitleProps) {
       variant={variant || (isDesktop ? 'h2' : 'h4')}
       color={color ? color : 'black'}
       sx={{
-        width: { xs: '80%', md: '35%'},
+        width: { xs: '80%', md: `${full ? '100%' : '35%'}`},
         padding: '20px',
         fontFamily: 'system-ui',
       }}

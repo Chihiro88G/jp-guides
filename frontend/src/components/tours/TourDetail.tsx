@@ -1,8 +1,6 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { Box, Typography } from '@mui/material';
-
 import SectionWrapper from '../SectionWrapper';
 import PageTitle from '../PageTitle';
 import Title from '../Title';
@@ -14,20 +12,30 @@ import StyledText from '../StyledText';
 
 export default function TourDetail() {
   const { tourId } = useParams();
-  if (!tourId) return;
+  const [tour, setTour] = useState<any>();
+  
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URI}/tours/${tourId}`)
+    .then(res => res.json())
+    .then(data => setTour(data));
+  }, [tourId]);
+
+  if (!tour) return <Box>No Tour Found</Box>
+
+  // TODO: review, activity level
 
   return (
     <SectionWrapper bgColor='beige' >
-      <PageTitle>TOUR NAME {tourId}</PageTitle>
+      <PageTitle full>{tour.tour_name}</PageTitle>
       <Box sx={{ padding: '0 25px' }}>
-        <StyledText bold>XX days</StyledText>
+        <StyledText bold>{tour.total_days} days</StyledText>
         <Box sx={{
           display: { xs: 'block', md: 'flex' },
           flexDirection: 'row'
         }}>
           <TourDetailItem>
             <Typography>Group size</Typography>
-            <Typography>YY - ZZ travelers</Typography>
+            <Typography>{tour.group_size_min} - {tour.group_size_max} travelers</Typography>
           </TourDetailItem>
           <TourDetailItem>
             <Typography>Reviews</Typography>
@@ -38,8 +46,8 @@ export default function TourDetail() {
             <Typography>High</Typography>
           </TourDetailItem>
           <Box>
-            <LikeButton tourId={parseInt(tourId)} isDetail />
-            <AddToCartButton tourId={parseInt(tourId)} />
+            <LikeButton tourId={parseInt(tour.id)} isDetail />
+            <AddToCartButton tourId={parseInt(tour.id)} />
           </Box>
         </Box>
 
@@ -49,12 +57,12 @@ export default function TourDetail() {
 
         <Box sx={{ padding: '25px' }}>
           <Title>Overview</Title>
-          <StyledText bold>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti, esse.</StyledText>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi ea incidunt repellendus laboriosam, possimus odio veniam. Cupiditate ipsa magni doloremque sequi officia distinctio tempore suscipit repellendus architecto est accusamus, maxime quo odio aliquid quam, culpa sunt tenetur itaque deleniti et odit eius alias quaerat expedita? Cumque dolores corrupti excepturi quis!
+          <StyledText bold>{tour.overview_title}</StyledText>
+          {tour.overview_content}
         </Box>
         <Box sx={{ padding: '25px' }}>
           <Title>Itenerary</Title>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi ea incidunt repellendus laboriosam, possimus odio veniam. Cupiditate ipsa magni doloremque sequi officia distinctio tempore suscipit repellendus architecto est accusamus, maxime quo odio aliquid quam, culpa sunt tenetur itaque deleniti et odit eius alias quaerat expedita? Cumque dolores corrupti excepturi quis!
+          COMING SOON...!
         </Box>
       </Box>
 
