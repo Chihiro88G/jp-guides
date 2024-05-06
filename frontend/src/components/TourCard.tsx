@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, CardActions, CardContent, Typography } from '@mui/material';
+import { Box, Button, CardActions, CardContent, Typography } from '@mui/material';
 import LikeButton from './LikeButton';
 import AddToCartButton from './AddToCartButton';
 import CardWithMedia from './CardWithMedia';
@@ -15,10 +15,12 @@ export default function TourCard({ tourData }: TourCardProps) {
   return (
     <CardWithMedia imgUrl={imgUrl}>
       <CardContent>
-        <Typography variant="body1" component="div">
-          {tourData.tour_name}
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Typography variant="body1" component="div">
+            {tourData.tour_name}
+          </Typography>
           <LikeButton tourId={tourData.id} />
-        </Typography>
+        </Box>
         <Typography variant="body2" color="text.secondary">
           {tourData.overview_title}
         </Typography>

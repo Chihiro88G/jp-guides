@@ -1,3 +1,5 @@
+DROP TABLE tours;
+
 CREATE TABLE tours (
   id integer PRIMARY KEY AUTO_INCREMENT,
   tour_name VARCHAR(255) NOT NULL,
@@ -24,7 +26,15 @@ VALUES
   The hotel you'll stay has been operating for 120+ years in the central Kyoto with Tatami rooms and Onsen."
 ),
 (
-  'Highlights of Japan: Tokyo to Kyoto', 7, 10, 15, 2500, 1, 3.5, 2, 'Discover how old traditions coexist with cutting-edge culture',
+  'Highlights of Japan: Tokyo to Kyoto', 7, 10, 15, 2500, 1, 3.5, 2, 'Discover how old traditions coexist with cutting-edge culture.',
   "You'll experience the Zen aesthetic every day of your tour — and not only while drinking tea. Uncover ancient temples alongside futuristic cityscapes and witness how Japan's art, architecture, and new culture reflect its time-honored philosophies."
+),
+(
+  'Japan for Solo Travelers', 9, 15, 30, 5600, 1, 4.0, 3, 'Get to know Japan from Mt. Fuji to Kyoto. Nature, food, and culture.',
+  "For many solo travelers, navigating the country's language and social etiquette alone can be overwhelming. But on this journey, you'll spend a week exploring with other solo travelers, and of course an expert tour director who will guide you from Tokyo to majestic Mt.Fuji to utterly charming Kyoto."
+),
+(
+  'North of Japan: Hokkaido', 5, 15, 20, 1800, 1, 4.0, 3, 'Discover the north! Stunning nature, ramen, and fresh fish',
+  "Hokkaido is known for skiing for sure, while there are so many spots to visit. This tour includes exploring fish market and savory factory making sweets using local fresh milk and cheese."
 )
 ;
