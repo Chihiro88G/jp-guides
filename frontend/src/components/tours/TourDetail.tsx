@@ -12,7 +12,7 @@ import StyledText from '../StyledText';
 
 export default function TourDetail() {
   const { tourId } = useParams();
-  const [tour, setTour] = useState<any>();
+  const [tour, setTour] = useState<any>(null);
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/tours/${tourId}`)
@@ -20,22 +20,30 @@ export default function TourDetail() {
     .then(data => setTour(data));
   }, [tourId]);
 
-  if (!tour) return <Box>No Tour Found</Box>
+  if (!tour) return <Box>Loading...</Box>
 
-  // TODO: review, activity level
+  return <RenderTourDetail tour={tour} />
+}
+
+function RenderTourDetail({ tour }: { tour: any }) {
+  const [priceCad, setPriceCad] = useState<number>(0);
+
+  useEffect(() => {
+    tour.discountRage !== 0 ? setPriceCad(tour.priceCad - (tour.priceCad * tour.discountRate)) : setPriceCad(tour.priceCad);
+  }, [tour]);
 
   return (
     <SectionWrapper bgColor='beige' >
-      <PageTitle full>{tour.tour_name}</PageTitle>
+      <PageTitle full>{tour.name}</PageTitle>
       <Box sx={{ padding: '0 25px' }}>
-        <StyledText bold>{tour.total_days} days</StyledText>
+        <StyledText bold>{tour.totalDays} days</StyledText>
         <Box sx={{
           display: { xs: 'block', md: 'flex' },
           flexDirection: 'row'
         }}>
           <TourDetailItem>
             <Typography>Group size</Typography>
-            <Typography>{tour.group_size_min} - {tour.group_size_max} travelers</Typography>
+            <Typography>{tour.groupSizeMin} - {tour.groupSizeMax} travelers</Typography>
           </TourDetailItem>
           <TourDetailItem>
             <Typography>Reviews</Typography>
@@ -43,7 +51,11 @@ export default function TourDetail() {
           </TourDetailItem>
           <TourDetailItem>
             <Typography>Physical activity</Typography>
-            <Typography>High</Typography>
+            <Typography>{tour.activityLevel}</Typography>
+          </TourDetailItem>
+          <TourDetailItem>
+            <Typography>Price (CAD)</Typography>
+            <Typography>{priceCad}</Typography>
           </TourDetailItem>
           <Box>
             <LikeButton tourId={parseInt(tour.id)} isDetail />
@@ -57,15 +69,14 @@ export default function TourDetail() {
 
         <Box sx={{ padding: '25px' }}>
           <Title>Overview</Title>
-          <StyledText bold>{tour.overview_title}</StyledText>
-          {tour.overview_content}
+          <StyledText bold>{tour.overviewTitle}</StyledText>
+          {tour.overviewContent}
         </Box>
         <Box sx={{ padding: '25px' }}>
           <Title>Itenerary</Title>
           COMING SOON...!
         </Box>
       </Box>
-
     </SectionWrapper>
   )
 }
