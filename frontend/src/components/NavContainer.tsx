@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { AppBar, Container, Toolbar } from '@mui/material';
 

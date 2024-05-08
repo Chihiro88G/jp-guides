@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react';
-
+import { ReactNode } from 'react';
 import { Typography } from '@mui/material';
 
 type StyledTextTypes = {

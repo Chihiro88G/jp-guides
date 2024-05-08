@@ -1,5 +1,4 @@
 import  { ReactNode } from 'react';
-
 import { Box } from '@mui/material';
 
 type TourDetailItemProps = {

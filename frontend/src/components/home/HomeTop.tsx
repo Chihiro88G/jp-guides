@@ -1,5 +1,3 @@
-import React from 'react';
-
 import SectionWrapper from '../SectionWrapper';
 import PageTitle from '../PageTitle';
 

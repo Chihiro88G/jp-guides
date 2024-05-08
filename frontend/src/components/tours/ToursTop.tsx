@@ -1,7 +1,4 @@
-import React from 'react';
-
 import { Box } from '@mui/material';
-
 import SectionWrapper from '../SectionWrapper';
 import Selection from './Selection';
 import PageTitle from '../PageTitle';

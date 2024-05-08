@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './ScrollToTop';
 import './index.css'
 import Home from './pages/Home';
 import Layout from './layouts/Layout';
@@ -11,6 +12,7 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <SwitchRoutes />
       </BrowserRouter>
     </>

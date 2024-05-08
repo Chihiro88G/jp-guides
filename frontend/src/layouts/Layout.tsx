@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-
 import { Box, CssBaseline, createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import TopNavBar from "./TopNavBar";
 import Footer from "./Footer";

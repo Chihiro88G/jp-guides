@@ -1,5 +1,3 @@
-import React from "react";
-
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementCartItem, decrementCartItem } from '../slices/cartCountSlice';
 import { setAddedToCart, setRemovedFromCart } from '../slices/isInCartSlice';

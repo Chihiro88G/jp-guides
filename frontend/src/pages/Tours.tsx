@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import ToursTop from '../components/tours/ToursTop';
 import ToursList from '../components/tours/ToursList';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Typography } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';

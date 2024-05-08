@@ -1,11 +1,11 @@
-import React from 'react';
+import { Fragment } from 'react';
 import Typography from '@mui/material/Typography';
 import TourIcon from '@mui/icons-material/Tour';
 
 export default function Logo() {
 
   return (
-    <React.Fragment>
+    <Fragment>
       <TourIcon sx={{ margin: '3px' }}/>
       <Typography
         variant="h6"
@@ -24,6 +24,6 @@ export default function Logo() {
       >
         GuideMeJp
       </Typography>
-    </React.Fragment>
+    </Fragment>
   );
 }
