@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import SectionWrapper from '../SectionWrapper';
 import PageTitle from '../PageTitle';
 import Title from '../Title';
@@ -22,7 +22,11 @@ export default function TourDetail() {
 
   if (!tour) return <Box>Loading...</Box>
 
-  return <RenderTourDetail tour={tour} />
+  return (
+    <SectionWrapper bgColor='beige' >
+      <RenderTourDetail tour={tour} />
+    </SectionWrapper>
+  )
 }
 
 function RenderTourDetail({ tour }: { tour: any }) {
@@ -33,7 +37,7 @@ function RenderTourDetail({ tour }: { tour: any }) {
   }, [tour]);
 
   return (
-    <SectionWrapper bgColor='beige' >
+    <Fragment>
       <PageTitle full>{tour.name}</PageTitle>
       <Box sx={{ padding: '0 25px' }}>
         <StyledText bold>{tour.totalDays} days</StyledText>
@@ -41,22 +45,22 @@ function RenderTourDetail({ tour }: { tour: any }) {
           display: { xs: 'block', md: 'flex' },
           flexDirection: 'row'
         }}>
-          <TourDetailItem>
-            <Typography>Group size</Typography>
-            <Typography>{tour.groupSizeMin} - {tour.groupSizeMax} travelers</Typography>
-          </TourDetailItem>
-          <TourDetailItem>
-            <Typography>Reviews</Typography>
-            <ReviewStars />
-          </TourDetailItem>
-          <TourDetailItem>
-            <Typography>Physical activity</Typography>
-            <Typography>{tour.activityLevel}</Typography>
-          </TourDetailItem>
-          <TourDetailItem>
-            <Typography>Price (CAD)</Typography>
-            <Typography>{priceCad}</Typography>
-          </TourDetailItem>
+          <TourDetailItem 
+            title='Group size'
+            content={`${tour.groupSizeMin} - ${tour.groupSizeMax} travelers`}
+          />
+          <TourDetailItem 
+            title='Reviews'
+            content={<ReviewStars />}
+          />
+          <TourDetailItem 
+            title='Physical activity'
+            content={tour.activityLevel}
+          />
+          <TourDetailItem 
+            title='Price (CAD)'
+            content={priceCad}
+          />
           <Box>
             <LikeButton tourId={parseInt(tour.id)} isDetail />
             <AddToCartButton tourId={parseInt(tour.id)} />
@@ -77,6 +81,6 @@ function RenderTourDetail({ tour }: { tour: any }) {
           COMING SOON...!
         </Box>
       </Box>
-    </SectionWrapper>
+    </Fragment>
   )
 }

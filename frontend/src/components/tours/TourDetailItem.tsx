@@ -1,18 +1,19 @@
-import  { ReactNode } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 type TourDetailItemProps = {
-  children: ReactNode
+  title: string,
+  content: any,
 };
 
-export default function TourDetailItem({ children }: TourDetailItemProps) {
+export default function TourDetailItem({ title, content }: TourDetailItemProps) {
   return (
     <Box
       sx={{ 
         margin: '10px 0',
         width: { xs: '100%', md: '15%'}
       }}>
-      {children}
+      <Typography>{title}</Typography>
+      <Typography>{content}</Typography>
     </Box>
   )
 }
