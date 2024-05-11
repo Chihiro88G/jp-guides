@@ -7,7 +7,7 @@ export default function ToursTop() {
   
   return (
     <SectionWrapper height='inherit' bgColor='white'>
-      <PageTitle>FIND TOURS</PageTitle>
+      <PageTitle full>FIND TOURS</PageTitle>
       <Box sx={{ 
         padding: '0 20px',
         display: { xs: 'flex', md: 'block' },
