@@ -1,13 +1,20 @@
-import { FormControl, TextField } from '@mui/material';
+import { forwardRef } from 'react';
+import { TextField } from '@mui/material';
 
 type FormTextFieldProps = {
   placeholder: string;
 }
 
-export default function FormTextField({ placeholder }: FormTextFieldProps) {
+const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(({ placeholder }, ref) => {
   return (
-    <FormControl sx={{ margin: '10px 0' }}>
-      <TextField label={placeholder} rows={10} multiline />
-    </FormControl>
-  )
-}
+    <TextField
+      placeholder={placeholder}
+      rows={10}
+      multiline
+      inputRef={ref}
+      sx={{ margin: '10px 0' }}
+    />
+  );
+});
+
+export default FormTextField;
