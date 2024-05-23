@@ -19,7 +19,7 @@ export default function ContactForm() {
 
   return (
     <SectionWrapper>
-      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: { xs: '100%', md: '50%' }, margin: '0 20px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: { xs: '90%', md: '50%' }, margin: '0 20px' }}>
         <FormInput
           label='Your name'
           id='name'

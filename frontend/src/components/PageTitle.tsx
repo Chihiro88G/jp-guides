@@ -18,7 +18,7 @@ export default function PageTitle(props: PageTitleProps) {
       variant={variant || (isDesktop ? 'h2' : 'h4')}
       color={color ? color : 'black'}
       sx={{
-        width: { xs: '80%', md: `${full ? '100%' : '35%'}`},
+        width: { xs: '100%', md: `${full ? '100%' : '35%'}`},
         padding: '20px',
         fontFamily: 'system-ui',
       }}

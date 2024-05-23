@@ -61,7 +61,7 @@ function RenderTourDetail({ tour }: { tour: any }) {
             title='Price (CAD)'
             content={priceCad}
           />
-          <Box>
+          <Box sx={{ display: 'flex', justifyContent: 'end'}}>
             <LikeButton tourId={parseInt(tour.id)} isDetail />
             <AddToCartButton tourId={parseInt(tour.id)} />
           </Box>

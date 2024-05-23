@@ -33,7 +33,7 @@ export default function LikeButton({ tourId, isDetail }: LikeButtonTypes) {
       onClick={() => handleLike()}
       sx={{
         // position: 'relarive',
-        bottom: isDetail ? '-15px' : '10px',
+        bottom: isDetail ? '0' : '10px',
         // left: isDetail ? '0' : '13%',
         
       }}
