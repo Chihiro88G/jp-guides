@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 type SelectionProps = {
   label: string;
-  items: string[]; 
+  items: string[];
+  onChange: (value: string) => void;
 }
 
-export default function Selection({ label, items }: SelectionProps) {
-  const [value, setValue] = useState('');
+export default function Selection({ label, items, onChange }: SelectionProps) {
+  const [selectedValue, setSelectedValue] = useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setValue(event.target.value as string);
+  useEffect(() => {
+    onChange(selectedValue);
+  }, [selectedValue, onChange])
+
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedValue(event.target.value);
   };
 
   return (
@@ -24,9 +29,9 @@ export default function Selection({ label, items }: SelectionProps) {
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={value}
+        value={selectedValue}
         label={label}
-        onChange={handleChange}
+        onChange={e => handleChange(e)}
       >
         {items.map(item => (
           <MenuItem value={item} key={item}>{item}</MenuItem>

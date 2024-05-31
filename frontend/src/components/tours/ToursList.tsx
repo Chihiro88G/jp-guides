@@ -5,7 +5,11 @@ import Title from '../Title';
 import TourCard from '../TourCard';
 import TourCards from '../TourCards';
 
-export default function ToursList() {
+type ToursListProps = {
+  query?: string;
+}
+
+export default function ToursList({ query }: ToursListProps) {
   const [items, setItems] = useState<any>();
   
   useEffect(() => {
@@ -16,11 +20,15 @@ export default function ToursList() {
 
   if (!items) return <Box>No Tours</Box>
 
+  const filteredItems = query
+  ? items.filter((item: any) => item.activityLevel === query.toLowerCase())
+  : items;
+
   return (
     <SectionWrapper bgColor='beige'>
       <Title>Tours</Title>
       <TourCards>
-        {items.map((item: any) => (
+        {filteredItems.map((item: any) => (
           <TourCard tourData={item} key={item.id}/>
         ))}
       </TourCards>

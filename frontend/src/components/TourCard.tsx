@@ -17,12 +17,12 @@ export default function TourCard({ tourData }: TourCardProps) {
       <CardContent>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
           <Typography variant="body1" component="div">
-            {tourData.tour_name}
+            {tourData.name}
           </Typography>
           <LikeButton tourId={tourData.id} />
         </Box>
         <Typography variant="body2" color="text.secondary">
-          {tourData.overview_title}
+          {tourData.overviewTitle}
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between' }}>
