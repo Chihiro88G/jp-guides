@@ -5,24 +5,28 @@ import PageTitle from '../components/PageTitle';
 import SectionWrapper from '../components/SectionWrapper';
 import Selection from '../components/tours/Selection';
 
-const destinationItems = ['Tokyo', 'Kyoto', 'Hokkaido'];
 const durationItems = ['1 day', '2-3 days', '3-5 days'];
 
 export default function Tours() {
   const [query, setQuery] = useState<string>('');
   const [activityLevelsItems, setActivityLevelsItems] = useState<string[]>([]);
+  const [destinationItems, setDestinationItems] = useState<string[]>([]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/activity-levels`)
     .then(res => res.json())
-    .then(data => setActivityLevelsItems(data.map((item: any) => {
-      return item.levelName
-    })));
+    .then(data => setActivityLevelsItems(data.map((item: any) => item.levelName)));
   }, []);
 
-  // const handleDestinationChange = () => {
-  //   console.log('inside destination change');
-  // }
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URI}/destinations`)
+    .then(res => res.json())
+    .then(data => setDestinationItems(data.map((item: any) => item.city_name)));
+  }, []);
+
+  const handleDestinationChange = () => {
+    console.log('inside destination change');
+  }
 
   const handleActivityLevelChange = (activityLevel: string) => {
     setQuery(activityLevel);
@@ -37,8 +41,8 @@ export default function Tours() {
           display: { xs: 'flex', md: 'block' },
           flexDirection: 'column'
         }}>
-          {/* <Selection label='Destination' items={destinationItems} onChange={handleDestinationChange}/>
-          <Selection label='Duration' items={durationItems} onChange={handleDestinationChange} /> */}
+          <Selection label='Destination' items={destinationItems} onChange={handleDestinationChange}/>
+          {/* <Selection label='Duration' items={durationItems} onChange={handleDestinationChange} /> */}
           <Selection label='Activity level' items={activityLevelsItems}  onChange={handleActivityLevelChange}/>
         </Box>
       </SectionWrapper>
