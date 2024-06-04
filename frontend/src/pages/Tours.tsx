@@ -8,7 +8,13 @@ import Selection from '../components/tours/Selection';
 const durationItems = ['1 day', '2-3 days', '3-5 days'];
 
 export default function Tours() {
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState<{
+    destination: string | undefined,
+    activityLevel: string | undefined,
+  }>({
+    destination: undefined,
+    activityLevel: undefined,
+  });
   const [activityLevelsItems, setActivityLevelsItems] = useState<string[]>([]);
   const [destinationItems, setDestinationItems] = useState<string[]>([]);
 
@@ -24,12 +30,15 @@ export default function Tours() {
     .then(data => setDestinationItems(data.map((item: any) => item.city_name)));
   }, []);
 
-  const handleDestinationChange = () => {
+  const handleDestinationChange = (destination: string) => {
     console.log('inside destination change');
   }
 
   const handleActivityLevelChange = (activityLevel: string) => {
-    setQuery(activityLevel);
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      activityLevel: activityLevel
+    }));
   }
 
   return (

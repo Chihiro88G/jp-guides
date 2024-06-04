@@ -6,7 +6,10 @@ import TourCard from '../TourCard';
 import TourCards from '../TourCards';
 
 type ToursListProps = {
-  query?: string;
+  query: {
+    destination: string | undefined,
+    activityLevel: string | undefined,
+  };
 }
 
 export default function ToursList({ query }: ToursListProps) {
@@ -20,9 +23,19 @@ export default function ToursList({ query }: ToursListProps) {
 
   if (!items) return <Box>No Tours</Box>
 
-  const filteredItems = query
-  ? items.filter((item: any) => item.activityLevel === query.toLowerCase())
-  : items;
+  let filteredItems = items;
+  if (query.activityLevel) {
+    filteredItems = items.filter((item: any) =>
+    item.activityLevel === query.activityLevel!.toLowerCase())
+  }
+  if (query.destination) {
+    filteredItems = items.filter((item: any) =>
+    item.destination === query.destination!.toLowerCase())
+  }
+
+  // const filteredItems = query
+  // ? items.filter((item: any) => item.activityLevel === query.activityLevel!.toLowerCase())
+  // : items;
 
   return (
     <SectionWrapper bgColor='beige'>
