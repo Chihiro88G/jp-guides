@@ -36,5 +36,9 @@ VALUES
 (
   'North of Japan: Hokkaido', 5, 15, 20, 1800, 1, 4.0, 3, 'Discover the north! Stunning nature, ramen, and fresh fish',
   "Hokkaido is known for skiing for sure, while there are so many spots to visit. This tour includes exploring fish market and savory factory making sweets using local fresh milk and cheese."
+),
+(
+  'South of Japan: Okinawa and Fukuoka', 5, 10, 20, 900, 1, 4.5, 1, 'Visit Okinawa and Fukuoka, where you will see different culture and enjoy various local food!',
+  "Okinawa is the destination for those who enjoy beach / island trips. Okinawa's culture is sometimes isolated from the mainland Japan as located. In Fukuoka, only 2 hours away from Korea, you must eat seafood and Hakata style ramen"
 )
 ;
