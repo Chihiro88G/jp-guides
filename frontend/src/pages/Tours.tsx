@@ -31,14 +31,21 @@ export default function Tours() {
   }, []);
 
   const handleDestinationChange = (destination: string) => {
-    console.log('inside destination change');
+    if (query.destination !== destination) {
+      setQuery({
+        ...query,
+        destination: destination,
+      });
+    }
   }
 
   const handleActivityLevelChange = (activityLevel: string) => {
-    setQuery((prevQuery) => ({
-      ...prevQuery,
-      activityLevel: activityLevel
-    }));
+    if (query.activityLevel !== activityLevel) {
+      setQuery({
+        ...query,
+        activityLevel: activityLevel,
+      });
+    }
   }
 
   return (

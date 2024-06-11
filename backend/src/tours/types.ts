@@ -22,4 +22,5 @@ export type TourModel = {
   activityLevel: string,
   overviewTitle: string,
   overviewContent: string,
+  destinations: string[],
 }

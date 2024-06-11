@@ -1,9 +1,11 @@
 import db from '../database';
 import { TourModel, TourRecord } from './types';
-import * as activityLevelsService from '../activity-levels/service';
-import * as discountsService from '../discounts/service';
 import { ActivityLevelsModel } from '../activity-levels/type';
 import { DiscountModel } from '../discounts/types';
+
+import * as activityLevelsService from '../activity-levels/service';
+import * as discountsService from '../discounts/service';
+import * as destinationsService from '../destinations/service';
 
 export async function findAll(): Promise<TourModel[]> {
   const query = `SELECT * FROM tours;`
@@ -11,7 +13,8 @@ export async function findAll(): Promise<TourModel[]> {
   
   const tours = await Promise.all(result.map(async (tour: TourRecord) => {
     const activityLevel = await activityLevelsService.findOneById(tour.activity_level_id);
-    return toModel(tour, activityLevel);
+    const destinations = await destinationsService.findByTourId(tour.id);
+    return toModel(tour, activityLevel, destinations);
   }));
 
   return tours;
@@ -24,12 +27,13 @@ export async function findOneById(tourId: number): Promise<TourModel> {
   const activityLevel = await activityLevelsService.findOneById(tour.activity_level_id);
   const discount = await discountsService.findOneById(tour.discount_id);
 
-  return toModel(tour, activityLevel, discount);
+  return toModel(tour, activityLevel, [], discount);
 }
 
 async function toModel(
   tour: TourRecord,
   activityLevel: ActivityLevelsModel,
+  destinations: string[],
   discount?: DiscountModel,
 ): Promise<TourModel> {
   return {
@@ -43,5 +47,6 @@ async function toModel(
     activityLevel: activityLevel.levelName,
     overviewTitle: tour.overview_title,
     overviewContent: tour.overview_content,
+    destinations: destinations,
   }
 }
