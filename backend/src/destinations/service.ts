@@ -17,6 +17,5 @@ export async function findByTourId(tourId: number): Promise<string[]> {
 
   const result = (await db.query(query, tourId))[0];
   const cityNames = result.map((item: any) => item.city_name)
-  console.log(cityNames);
   return cityNames;
 }

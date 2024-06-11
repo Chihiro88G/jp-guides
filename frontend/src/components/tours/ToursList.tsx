@@ -40,26 +40,30 @@ function RenderTours({ tours, query }: RenderToursProps) {
   const [filteredTours, setFilteredTours] = useState<any[]>(tours);
 
   useEffect(() => {
-    let result = tours;
+    let toursToFilter = tours;
     if (query.activityLevel) {
-      result = result.filter((tour: any) =>
+      toursToFilter = toursToFilter.filter((tour: any) =>
       tour.activityLevel === query.activityLevel!.toLowerCase());
     };
     if (query.destination) {
-      result = result.filter((tour: any) =>
+      toursToFilter = toursToFilter.filter((tour: any) =>
       tour.destinations.includes(query.destination!));
     };
 
-    setFilteredTours(result);
+    setFilteredTours(toursToFilter);
   }, [tours, query]);
 
   return (
     <SectionWrapper bgColor='beige'>
       <Title>Tours</Title>
       <TourCards>
-        {filteredTours.map((tour: any) => (
-          <TourCard tourData={tour} key={tour.id}/>
-        ))}
+        {filteredTours.length > 0 ?
+          filteredTours.map((tour: any) => (
+            <TourCard tourData={tour} key={tour.id}/>
+          ))
+        :
+          'No Tours Found.'
+        }
       </TourCards>
     </SectionWrapper>
   )

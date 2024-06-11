@@ -11,7 +11,7 @@ export default function Selection({ label, items, onChange }: SelectionProps) {
   const [selectedValue, setSelectedValue] = useState('');
 
   useEffect(() => {
-    onChange(selectedValue);
+    onChange(selectedValue === 'All' ? '' : selectedValue);
   }, [selectedValue, onChange])
 
   const handleChange = (event: SelectChangeEvent<string>) => {
@@ -33,6 +33,7 @@ export default function Selection({ label, items, onChange }: SelectionProps) {
         label={label}
         onChange={e => handleChange(e)}
       >
+        <MenuItem value='All' key='all'>All</MenuItem>
         {items.map(item => (
           <MenuItem value={item} key={item}>{item}</MenuItem>
         ))}
