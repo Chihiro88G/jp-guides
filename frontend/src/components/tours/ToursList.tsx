@@ -55,7 +55,7 @@ function RenderTours({ tours, query }: RenderToursProps) {
 
   return (
     <SectionWrapper bgColor='beige'>
-      <Title>Tours</Title>
+      <Title>{filteredTours.length} Tours Found!</Title>
       <TourCards>
         {filteredTours.length > 0 ?
           filteredTours.map((tour: any) => (
