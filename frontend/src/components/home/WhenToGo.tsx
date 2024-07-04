@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
 import Title from '../Title';
 import SectionWrapper from '../SectionWrapper';
+import WeatherBarChart from './WeatherBarChart';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -28,6 +29,7 @@ export default function WhenToGo() {
           }}
         >
           A good time to travel, but there may be some factors to be aware of
+          <WeatherBarChart />
         </Box>
       </Box>
     </SectionWrapper>
