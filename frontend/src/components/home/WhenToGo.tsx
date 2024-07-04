@@ -21,7 +21,14 @@ export default function WhenToGo() {
             <Tab label={month} />
         ))}
         </Tabs>
-        <Box>Content here</Box>
+        <Box
+          sx={{
+            padding: '30px',
+            backgroundColor: 'white',
+          }}
+        >
+          A good time to travel, but there may be some factors to be aware of
+        </Box>
       </Box>
     </SectionWrapper>
   )
