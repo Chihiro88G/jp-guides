@@ -3,14 +3,11 @@ import { WeatherModel, WeatherRecord } from './types';
 import { getMonthString } from './utils';
 
 export async function findAll(): Promise<WeatherModel[]> {
-  const query = `SELECT * FROM tours;`
+  const query = `SELECT * FROM weather;`
   const result = (await db.query(query))[0];
-  
-  result.map((record: WeatherRecord) => {
-    
-  })
+  const weatherData = await Promise.all(result.map((record: WeatherRecord) => toModel(record)));
 
-  return [];
+  return weatherData;
 }
 
 async function toModel(

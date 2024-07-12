@@ -1,6 +1,10 @@
 import { BarChart } from '@mui/x-charts/BarChart';
 
-export default function WeatherBarChart() {
+type WeatherBarChartProps = {
+  weatherdata: any;
+};
+
+export default function WeatherBarChart({ weatherdata }: WeatherBarChartProps) {
   const months = [
     'January',
     'February',
@@ -15,6 +19,11 @@ export default function WeatherBarChart() {
     'November',
     'December',
   ]
+
+  console.log(weatherdata);
+
+  // const maxTemp = weatherdata.map((weather: any) => weather.maxTemp);
+  // console.log(maxTemp);
 
   return (
     <BarChart
