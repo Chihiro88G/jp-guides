@@ -4,7 +4,7 @@ import Title from '../Title';
 import SectionWrapper from '../SectionWrapper';
 import WeatherBarChart from './WeatherBarChart';
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default function WhenToGo() {
   const [month, setMonth] = useState(0);

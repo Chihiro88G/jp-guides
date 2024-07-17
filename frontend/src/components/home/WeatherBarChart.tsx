@@ -1,29 +1,16 @@
 import { BarChart } from '@mui/x-charts/BarChart';
+import { months } from './WhenToGo';
 
 type WeatherBarChartProps = {
   weatherdata: any;
 };
 
 export default function WeatherBarChart({ weatherdata }: WeatherBarChartProps) {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
+  if (!weatherdata) return <div>No months</div>;
   console.log(weatherdata);
 
-  // const maxTemp = weatherdata.map((weather: any) => weather.maxTemp);
-  // console.log(maxTemp);
+  const maxTempList = weatherdata.map((weather: any) => weather.maxTemp);
+  const rainList = weatherdata.map((weather: any) => weather.rain);
 
   return (
     <BarChart
@@ -39,8 +26,8 @@ export default function WeatherBarChart({ weatherdata }: WeatherBarChartProps) {
         { id: 'rainAxis', scaleType: 'linear' }
       ]}
       series={[
-        { yAxisKey: 'temperatureAxis', data: [9, 19, 29, 9, 19, 29, 9, 19, 29, 9, 19, 29], label: 'tempreture' },
-        { yAxisKey: 'rainAxis', data: [70, 17, 27, 70, 17, 27, 7, 17, 27, 7, 17, 27], label: 'rain' },
+        { yAxisKey: 'temperatureAxis', data: maxTempList, label: 'tempreture' },
+        { yAxisKey: 'rainAxis', data: rainList, label: 'rain' },
       ]}
       leftAxis="temperatureAxis"
       rightAxis="rainAxis"
