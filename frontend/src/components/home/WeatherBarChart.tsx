@@ -7,7 +7,6 @@ type WeatherBarChartProps = {
 
 export default function WeatherBarChart({ weatherdata }: WeatherBarChartProps) {
   if (!weatherdata) return <div>No months</div>;
-  console.log(weatherdata);
 
   const maxTempList = weatherdata.map((weather: any) => weather.maxTemp);
   const rainList = weatherdata.map((weather: any) => weather.rain);
