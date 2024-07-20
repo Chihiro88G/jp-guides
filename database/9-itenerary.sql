@@ -12,5 +12,6 @@ CREATE TABLE itenerary (
 
 INSERT INTO itenerary (title, included_meal_id, content)
 VALUES 
-('Arrival in Tokyo', 1, 'Enjoy a free day in Tokyo or add an excursion.')
+('Arrival in Tokyo', 1, 'Enjoy a free day in Tokyo or add an excursion.'),
+('Arrival in Kyoto', 2, 'Enjoy a free day in Kyoto or add an excursion.')
 ;
