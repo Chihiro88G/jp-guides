@@ -36,6 +36,12 @@ function RenderTourDetail({ tour }: { tour: any }) {
     tour.discountRage !== 0 ? setPriceCad(tour.priceCad - (tour.priceCad * tour.discountRate)) : setPriceCad(tour.priceCad);
   }, [tour]);
 
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URI}/itenerary?tourId=${tour.id}`)
+    .then(res => res.json())
+    .then(data => console.log(data));
+  }, [tour.id]);
+
   return (
     <Fragment>
       <PageTitle full>{tour.name}</PageTitle>
