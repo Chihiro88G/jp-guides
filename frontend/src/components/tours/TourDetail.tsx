@@ -37,10 +37,10 @@ function RenderTourDetail({ tour }: { tour: any }) {
   }, [tour]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URI}/itenerary?tourId=${tour.id}`)
+    fetch(`${process.env.REACT_APP_API_URI}/itenerary/${tour.id}`)
     .then(res => res.json())
     .then(data => console.log(data));
-  }, [tour.id]);
+  }, [tour]);
 
   return (
     <Fragment>
