@@ -13,9 +13,9 @@ export async function findOneByTourId(tourId: number): Promise<IteneraryModel[] 
     ;  
   `;
 
-  const retult = (await db.query(query, tourId))[0];
+  const result = (await db.query(query, tourId))[0];
 
-  const iteneraryList = await Promise.all(retult.map(async (item: IteneraryRecord) => {
+  const iteneraryList = await Promise.all(result.map(async (item: IteneraryRecord) => {
     const meal = await mealsService.findById(item.included_meal_id);
     return toModel(item, meal);
   }));

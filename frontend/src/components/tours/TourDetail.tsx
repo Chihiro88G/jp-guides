@@ -9,6 +9,7 @@ import ReviewStars from './ReviewStars';
 import LikeButton from '../LikeButton';
 import AddToCartButton from '../AddToCartButton';
 import StyledText from '../StyledText';
+import Itenerary from './Itenerary';
 
 export default function TourDetail() {
   const { tourId } = useParams();
@@ -31,6 +32,7 @@ export default function TourDetail() {
 
 function RenderTourDetail({ tour }: { tour: any }) {
   const [priceCad, setPriceCad] = useState<number>(0);
+  const [itenerary, setItenerary] = useState<any>();
 
   useEffect(() => {
     tour.discountRage !== 0 ? setPriceCad(tour.priceCad - (tour.priceCad * tour.discountRate)) : setPriceCad(tour.priceCad);
@@ -39,8 +41,10 @@ function RenderTourDetail({ tour }: { tour: any }) {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/itenerary/${tour.id}`)
     .then(res => res.json())
-    .then(data => console.log(data));
+    .then(data => setItenerary(data));
   }, [tour]);
+
+  if (!itenerary) return <Box>Loading...</Box>
 
   return (
     <Fragment>
@@ -84,7 +88,7 @@ function RenderTourDetail({ tour }: { tour: any }) {
         </Box>
         <Box sx={{ padding: '25px' }}>
           <Title>Itenerary</Title>
-          COMING SOON...!
+          <Itenerary itenerary={itenerary} />
         </Box>
       </Box>
     </Fragment>
