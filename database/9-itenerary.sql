@@ -1,4 +1,4 @@
-DROP TABLE itenerary
+DROP TABLE itenerary;
 
 CREATE TABLE itenerary (
   id integer PRIMARY KEY AUTO_INCREMENT,
@@ -13,5 +13,6 @@ CREATE TABLE itenerary (
 INSERT INTO itenerary (title, included_meal_id, content)
 VALUES 
 ('Arrival in Tokyo', 1, 'Enjoy a free day in Tokyo or add an excursion.'),
-('Arrival in Kyoto', 2, 'Enjoy a free day in Kyoto or add an excursion.')
+('Arrival in Kyoto', 2, 'Enjoy a free day in Kyoto or add an excursion.'),
+('Sightseeing tour of Tokyo', 3, "Embark on your tour of Japan's capital.\r\n- Make a photo stop and view the iconic Shibuya crossing from overhead as you drive through the central part of the city.")
 ;

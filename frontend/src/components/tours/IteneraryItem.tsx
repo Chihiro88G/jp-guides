@@ -20,9 +20,9 @@ export default function IteneraryItem({ iteneraryItem, dayIndex }: IteneraryItem
         Included meals: {iteneraryItem.includedMeals}
       </Box>
       <Box sx={{
-        fontWeight: 'light',
         marginTop: '10px',
-      }}>{iteneraryItem.content}
+      }}>
+        <pre>{iteneraryItem.content}</pre>
       </Box>
     </Typography>
   )

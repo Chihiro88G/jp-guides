@@ -10,7 +10,6 @@ CREATE TABLE tours_itenerary (
 
 INSERT INTO tours_itenerary (tour_id, itenerary_id)
 VALUES
-(1, 2),
 (2, 1),
-(2, 2)
+(2, 5)
 ;
