@@ -22,12 +22,25 @@ export async function findAll(): Promise<TourModel[]> {
 
 export async function findOneById(tourId: number): Promise<TourModel> {
   const query = `SELECT * FROM tours WHERE id = ?`;
-  const tour: TourRecord = (await db.query(query, tourId))[0][0];
+  const result: TourRecord = (await db.query(query, tourId))[0][0];
 
-  const activityLevel = await activityLevelsService.findOneById(tour.activity_level_id);
-  const discount = await discountsService.findOneById(tour.discount_id);
+  const activityLevel = await activityLevelsService.findOneById(result.activity_level_id);
+  const discount = await discountsService.findOneById(result.discount_id);
 
-  return toModel(tour, activityLevel, [], discount);
+  return toModel(result, activityLevel, [], discount);
+}
+
+export async function findPopular(): Promise<TourModel[]> {
+  const query = `SELECT * FROM tours ORDER BY review DESC LIMIT 3;`
+  const result = (await db.query(query))[0];
+
+  const tours = await Promise.all(result.map(async (tour: TourRecord) => {
+    const activityLevel = await activityLevelsService.findOneById(tour.activity_level_id);
+    const destinations = await destinationsService.findByTourId(tour.id);
+    return toModel(tour, activityLevel, destinations);
+  }));
+
+  return tours;
 }
 
 async function toModel(

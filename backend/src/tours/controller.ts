@@ -3,7 +3,9 @@ import * as service from './service';
 class ToursController {
 
   async get(req: Request, res: Response): Promise<void> {
-    const result = await service.findAll();
+    const result = req.query.popular
+                    ? await service.findPopular()
+                    : await service.findAll();
     res.send(result);
   }
 

@@ -40,5 +40,9 @@ VALUES
 (
   'South of Japan: Okinawa and Fukuoka', 5, 10, 20, 900, 1, 4.5, 1, 'Visit Okinawa and Fukuoka, where you will see different culture and enjoy various local food!',
   "Okinawa is the destination for those who enjoy beach / island trips. Okinawa's culture is sometimes isolated from the mainland Japan as located. In Fukuoka, only 2 hours away from Korea, you must eat seafood and Hakata style ramen"
+),
+(
+  '[Limited in March & April] Cherry Blossoms and History: Tokyo, Osaka, Hirishima', 8, 5, 10, 1300, 1, 4.3, 1, 'Enjoy the cherry blossoms only in the limited season!',
+  "Traveling on Shinkansen train, we'll visit historical and stunning sakura (cherry blossoms) spots including Emperial Palace in Tokyo, Osaka Castle, and Hiroshima Peace Memorial Museum."
 )
 ;

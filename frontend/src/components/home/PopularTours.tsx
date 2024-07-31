@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Link } from '@mui/material';
+import { TourType } from '../../types/tours';
 import Title from '../Title';
 import TourCard from '../TourCard';
 import SectionWrapper from '../SectionWrapper';
@@ -9,22 +10,22 @@ export default function PopularTours() {
   const [items, setItems] = useState<any>();
   
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URI}/tours`)
+    fetch(`${process.env.REACT_APP_API_URI}/tours?popular=true`)
     .then(res => res.json())
-    .then(data => setItems(data));
+    .then((data: TourType) => setItems(data));
   }, []);
 
   if (!items) return <Box>No Tours</Box>
 
   return (
-    <SectionWrapper bgColor='beige' >
+    <SectionWrapper bgColor='beige' height='470px' >
       <Title>Popular Tours</Title>
       <TourCards>
         {items.map((item: any) => (
           <TourCard tourData={item} key={item.id}/>
         ))}
       </TourCards>
-      {/* <Typography>Browse all tours...</Typography> */}
+      <Link sx={{ float: 'right'}}>Browse all tours...</Link>
     </SectionWrapper>
   )
 }
