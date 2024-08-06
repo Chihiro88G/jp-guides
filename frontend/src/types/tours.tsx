@@ -5,7 +5,7 @@ export type TourType = {
   groupSizeMin: number,
   groupSizeMax: number,
   priceCad: number,
-  discountRate: number | null,
+  discountRate: number,
   activityLevel: string,
   overviewTitle: string,
   overviewContent: string,

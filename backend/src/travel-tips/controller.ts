@@ -3,7 +3,7 @@ import * as service from './service';
 
 class TravelTipsController {
 
-  async get(req: Request, res: Response): Promise<any> {
+  async get(req: Request, res: Response): Promise<void> {
     const result = await service.findAll();
     res.send(result);
   }

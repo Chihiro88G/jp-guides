@@ -1,15 +1,16 @@
 import { BarChart } from '@mui/x-charts/BarChart';
 import { months } from './WhenToGo';
+import { WeatherType } from '../../types/weather';
 
 type WeatherBarChartProps = {
-  weatherdata: any;
+  weatherdata: WeatherType[];
 };
 
 export default function WeatherBarChart({ weatherdata }: WeatherBarChartProps) {
   if (!weatherdata) return <div>No months</div>;
 
-  const maxTempList = weatherdata.map((weather: any) => weather.maxTemp);
-  const rainList = weatherdata.map((weather: any) => weather.rain);
+  const maxTempList = weatherdata.map((weather: WeatherType) => weather.maxTemp);
+  const rainList = weatherdata.map((weather: WeatherType) => weather.rain);
 
   return (
     <BarChart

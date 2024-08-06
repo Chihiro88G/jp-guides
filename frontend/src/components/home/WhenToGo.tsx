@@ -3,18 +3,21 @@ import { Box, Tabs, Tab, Typography } from '@mui/material';
 import Title from '../Title';
 import SectionWrapper from '../SectionWrapper';
 import WeatherBarChart from './WeatherBarChart';
+import { WeatherType } from '../../types/weather';
 
 export const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default function WhenToGo() {
   const [month, setMonth] = useState(0);
-  const [items, setItems] = useState<any>();
+  const [items, setItems] = useState<WeatherType[]>();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/weather`)
     .then(res => res.json())
-    .then(data => setItems(data));
+    .then((data: WeatherType[]) => setItems(data));
   }, []);
+
+  if (!items) return <Box>No Data for when to go</Box>
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setMonth(newValue);
@@ -25,7 +28,7 @@ export default function WhenToGo() {
       <Title>When To Go</Title>
       <Box sx={{ width: '100%' }}>
         <Tabs value={month} onChange={handleChange} centered>
-          {months.map(month => (
+          {months.map((month: string) => (
             <Tab label={month} key={month}/>
         ))}
         </Tabs>

@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 
 type TourDetailItemProps = {
   title: string,
-  content: any,
+  content: string | number | JSX.Element,
 };
 
 export default function TourDetailItem({ title, content }: TourDetailItemProps) {

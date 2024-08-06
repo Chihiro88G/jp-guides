@@ -3,9 +3,10 @@ import { Box, Button, CardActions, CardContent, Typography } from '@mui/material
 import LikeButton from './LikeButton';
 import AddToCartButton from './AddToCartButton';
 import CardWithMedia from './CardWithMedia';
+import { TourType } from '../types/tours';
 
 type TourCardProps = {
-  tourData: any;
+  tourData: TourType;
 }
 
 export default function TourCard({ tourData }: TourCardProps) {

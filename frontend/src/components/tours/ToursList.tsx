@@ -4,6 +4,7 @@ import SectionWrapper from '../SectionWrapper';
 import Title from '../Title';
 import TourCard from '../TourCard';
 import TourCards from '../TourCards';
+import { TourType } from '../../types/tours';
 
 type ToursListProps = {
   query: {
@@ -13,12 +14,12 @@ type ToursListProps = {
 }
 
 export default function ToursList({ query }: ToursListProps) {
-  const [tours, setTours] = useState<any>();
+  const [tours, setTours] = useState<TourType[]>();
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/tours`)
     .then(res => res.json())
-    .then(data => setTours(data));
+    .then((data: TourType[]) => setTours(data));
   }, []);
 
   if (!tours) return <Box>No Tours</Box>
@@ -29,7 +30,7 @@ export default function ToursList({ query }: ToursListProps) {
 }
 
 type RenderToursProps = {
-  tours: any[];
+  tours: TourType[];
   query: {
     destination: string | undefined,
     activityLevel: string | undefined,
@@ -37,16 +38,16 @@ type RenderToursProps = {
 }
 
 function RenderTours({ tours, query }: RenderToursProps) {
-  const [filteredTours, setFilteredTours] = useState<any[]>(tours);
+  const [filteredTours, setFilteredTours] = useState<TourType[]>(tours);
 
   useEffect(() => {
     let toursToFilter = tours;
     if (query.activityLevel) {
-      toursToFilter = toursToFilter.filter((tour: any) =>
+      toursToFilter = toursToFilter.filter((tour: TourType) =>
       tour.activityLevel === query.activityLevel!.toLowerCase());
     };
     if (query.destination) {
-      toursToFilter = toursToFilter.filter((tour: any) =>
+      toursToFilter = toursToFilter.filter((tour: TourType) =>
       tour.destinations.includes(query.destination!));
     };
 
@@ -58,7 +59,7 @@ function RenderTours({ tours, query }: RenderToursProps) {
       <Title>{filteredTours.length} Tours Found!</Title>
       <TourCards>
         {filteredTours.length > 0 ?
-          filteredTours.map((tour: any) => (
+          filteredTours.map((tour: TourType) => (
             <TourCard tourData={tour} key={tour.id}/>
           ))
         :

@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { TourType } from '../../types/tours';
 import SectionWrapper from '../SectionWrapper';
 import PageTitle from '../PageTitle';
 import Title from '../Title';
@@ -10,15 +11,16 @@ import LikeButton from '../LikeButton';
 import AddToCartButton from '../AddToCartButton';
 import StyledText from '../StyledText';
 import Itenerary from './Itenerary';
+import { IteneraryType } from '../../types/itenerary';
 
 export default function TourDetail() {
   const { tourId } = useParams();
-  const [tour, setTour] = useState<any>(null);
+  const [tour, setTour] = useState<TourType>();
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/tours/${tourId}`)
     .then(res => res.json())
-    .then(data => setTour(data));
+    .then((data: TourType) => setTour(data));
   }, [tourId]);
 
   if (!tour) return <Box>Loading...</Box>
@@ -30,18 +32,18 @@ export default function TourDetail() {
   )
 }
 
-function RenderTourDetail({ tour }: { tour: any }) {
+function RenderTourDetail({ tour }: { tour: TourType }) {
   const [priceCad, setPriceCad] = useState<number>(0);
-  const [itenerary, setItenerary] = useState<any>();
+  const [itenerary, setItenerary] = useState<IteneraryType[]>();
 
   useEffect(() => {
-    tour.discountRage !== 0 ? setPriceCad(tour.priceCad - (tour.priceCad * tour.discountRate)) : setPriceCad(tour.priceCad);
+    tour.discountRate !== 0 ? setPriceCad(tour.priceCad - (tour.priceCad * tour.discountRate)) : setPriceCad(tour.priceCad);
   }, [tour]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/itenerary/${tour.id}`)
     .then(res => res.json())
-    .then(data => setItenerary(data));
+    .then((data: IteneraryType[]) => setItenerary(data));
   }, [tour]);
 
   if (!itenerary) return <Box>Loading...</Box>
@@ -72,8 +74,8 @@ function RenderTourDetail({ tour }: { tour: any }) {
             content={priceCad}
           />
           <Box sx={{ display: 'flex', justifyContent: 'end'}}>
-            <LikeButton tourId={parseInt(tour.id)} isDetail />
-            <AddToCartButton tourId={parseInt(tour.id)} />
+            <LikeButton tourId={tour.id} isDetail />
+            <AddToCartButton tourId={tour.id} />
           </Box>
         </Box>
 
