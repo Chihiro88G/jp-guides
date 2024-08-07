@@ -16,7 +16,7 @@ export default function TopNavBar() {
       <Logo />
       <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'end' }}>
         {getPages().map((page) => (
-          <PageButton 
+          <PageButton
             pageName={page.name}
             path={page.path}
             key={page.name}
@@ -30,8 +30,14 @@ export default function TopNavBar() {
   );
 }
 
+type LikeCountState = {
+  likeCount: {
+    value: number;
+  }
+}
+
 function LikeCountIcon() {
-  const likeCount = useSelector((state: any) => state.likeCount.value);
+  const likeCount = useSelector((state: LikeCountState) => state.likeCount.value);
   return (
     <Box sx={{ padding: '20px 8px' }}>
       <FavoriteIcon />{likeCount}
@@ -39,8 +45,14 @@ function LikeCountIcon() {
   )
 }
 
+type CartCountState = {
+  cartCount: {
+    value: number;
+  }
+}
+
 function CartCountIcon() {
-  const cartCount = useSelector((state: any) => state.cartCount.value);
+  const cartCount = useSelector((state: CartCountState) => state.cartCount.value);
   return (
     <Box sx={{ padding: '20px 8px' }}>
       <ShoppingCartIcon />{cartCount}

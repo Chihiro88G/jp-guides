@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
+import { IteneraryType } from "../../types/itenerary";
 
 type IteneraryItemProps = {
-  iteneraryItem: any,
+  iteneraryItem: IteneraryType,
   dayIndex: number,
 }
 

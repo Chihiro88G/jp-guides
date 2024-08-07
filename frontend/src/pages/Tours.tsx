@@ -5,6 +5,7 @@ import PageTitle from '../components/PageTitle';
 import SectionWrapper from '../components/SectionWrapper';
 import Selection from '../components/tours/Selection';
 import { getDurations } from '../utils/getDurations';
+import { ActivityLevelsType } from '../types/activityLevels';
 
 export default function Tours() {
   const [query, setQuery] = useState<{
@@ -25,7 +26,7 @@ export default function Tours() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/activity-levels`)
     .then(res => res.json())
-    .then(data => setActivityLevelsItems(data.map((item: any) => item.levelName)));
+    .then(data => setActivityLevelsItems(data.map((item: ActivityLevelsType) => item.levelName)));
   }, []);
 
   useEffect(() => {
