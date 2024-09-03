@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 type PageButtonProps = {
-  pageName: string;
+  pageName: string | any;
   path: string;
 }
 

@@ -3,12 +3,14 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LoginIcon from '@mui/icons-material/Login';
 
 import Logo from '../components/Logo';
 import UserIcon from '../components/UserIcon';
 import NavContainer from '../components/NavContainer';
 import { getPages } from '../utils/getPages';
 import PageButton from './PageButton';
+import { Link } from 'react-router-dom';
 
 export default function TopNavBar() {
   return (
@@ -25,7 +27,12 @@ export default function TopNavBar() {
         <LikeCountIcon />
         <CartCountIcon />
       </Box>
-      <UserIcon />
+      {/* <UserIcon /> */}
+      <Box>
+        <Link to='/login'>
+          <LoginIcon sx={{ color: 'white' }}/>
+        </Link>
+      </Box>
     </NavContainer>
   );
 }
