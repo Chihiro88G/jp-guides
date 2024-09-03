@@ -18,7 +18,7 @@
   "main": "app.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "nodemon src/app.ts",
     "dev": "nodemon src/app.ts"
   },
   "keywords": [],

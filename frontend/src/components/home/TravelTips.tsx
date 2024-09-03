@@ -7,7 +7,7 @@ import AccordionItem from './AccordionItem';
 import TravelTipsWrapper from './TravelTipsWrapper';
 
 export default function TravelTips() {
-  const [data, setData] = useState<TravelTipsType[]>();
+  const [data, setData] = useState<TravelTipsType[]>([]);
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/travel-tips`)
@@ -15,7 +15,7 @@ export default function TravelTips() {
     .then((data: TravelTipsType[]) => setData(data));
   }, []);
 
-  if (!data) return <Box>No Travel Tips</Box>
+  if (data.length < 1) return <Box>No Travel Tips</Box>
   
   return (
     <SectionWrapper>
