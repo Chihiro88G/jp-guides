@@ -22,7 +22,7 @@ export default function Selection({ label, items, onChange }: SelectionProps) {
     <FormControl
       sx={{ 
         width: { md: '15%', xs: '100%'},
-        margin: { xs: '5px 0', md: '5px 5px' },
+        m: { xs: '5px 0', md: '5px 5px' },
       }}
     >
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>

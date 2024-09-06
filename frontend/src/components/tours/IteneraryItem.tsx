@@ -9,7 +9,7 @@ type IteneraryItemProps = {
 export default function IteneraryItem({ iteneraryItem, dayIndex }: IteneraryItemProps) {
 
   return (
-    <Typography component='div' sx={{ marginBottom: '30px' }}>
+    <Typography component='div' sx={{ mb: '30px' }}>
       <Box sx={{
         fontWeight: 'bold'
       }}>
@@ -21,7 +21,7 @@ export default function IteneraryItem({ iteneraryItem, dayIndex }: IteneraryItem
         Included meals: {iteneraryItem.includedMeals}
       </Box>
       <Box sx={{
-        marginTop: '10px',
+        mt: '10px',
       }}>
         <pre>{iteneraryItem.content}</pre>
       </Box>

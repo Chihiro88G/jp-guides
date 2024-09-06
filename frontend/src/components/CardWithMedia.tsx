@@ -11,7 +11,7 @@ export default function CardWithMedia({ children, imgUrl }: CardWithMediaProps) 
     <Card
       sx={{
         width: { xs: 'inherit', md: '31%'},
-        margin: '10px',
+        m: '10px',
         borderRadius: '10px',
         ':hover': {
           boxShadow: 5,

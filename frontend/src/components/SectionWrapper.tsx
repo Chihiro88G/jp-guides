@@ -24,8 +24,8 @@ export default function SectionWrapper(props: SectionWrapperProps) {
         sx={{
           display: 'block',
           height: `${height ? height : ''}`,
-          margin: '0 auto',
-          padding: '10px',
+          m: '0 auto',
+          p: '10px',
         }} 
         maxWidth="lg"
       >

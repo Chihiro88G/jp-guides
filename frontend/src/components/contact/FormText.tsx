@@ -12,7 +12,7 @@ const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(({ placehol
       rows={10}
       multiline
       inputRef={ref}
-      sx={{ margin: '10px 0' }}
+      sx={{ m: '10px 0' }}
     />
   );
 });

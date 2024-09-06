@@ -8,7 +8,7 @@ type FormInputProps = {
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({ label, id }, ref) => {
   return (
-    <FormControl sx={{ margin: '10px 0' }}>
+    <FormControl sx={{ m: '10px 0' }}>
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <Input id={id} aria-describedby="" inputRef={ref} />
       {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}

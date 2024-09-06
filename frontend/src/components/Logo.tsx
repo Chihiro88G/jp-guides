@@ -6,7 +6,7 @@ export default function Logo() {
 
   return (
     <Fragment>
-      <TourIcon sx={{ margin: '3px' }}/>
+      <TourIcon sx={{ m: '3px' }}/>
       <Typography
         variant="h6"
         noWrap

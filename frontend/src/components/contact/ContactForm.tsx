@@ -19,7 +19,7 @@ export default function ContactForm() {
 
   return (
     <SectionWrapper>
-      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: { xs: '90%', md: '50%' }, margin: '0 20px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: { xs: '90%', md: '50%' }, m: '0 20px' }}>
         <FormInput
           label='Your name'
           id='name'
@@ -36,7 +36,7 @@ export default function ContactForm() {
         />
         <Button
           variant="contained"
-          sx={{ width: '20%', margin: '0 auto' }}
+          sx={{ width: '20%', m: '0 auto' }}
           onClick={(event) => handleSubmit(event)}
         >
           Submit
