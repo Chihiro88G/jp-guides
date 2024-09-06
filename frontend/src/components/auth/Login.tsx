@@ -1,4 +1,5 @@
-
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { LockOutlined } from "@mui/icons-material";
 import {
   Container,
@@ -10,15 +11,16 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
+
     const userData = {
       email: email,
       password: password,
@@ -39,6 +41,7 @@ const Login = () => {
       })
       .then((data) => {
         console.log("Login successful:", data);
+        navigate('/');
       })
       .catch((error) => {
         console.error("Login failed:", error);
