@@ -7,8 +7,8 @@ import Tours from './pages/Tours';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import TourDetail from './components/tours/TourDetail';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 export default function App() {
   return (
