@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined } from "@mui/icons-material";
 import {
   Container,
@@ -12,15 +12,14 @@ import {
   Grid,
 } from "@mui/material";
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-
+  const handleLogin = async() => {
     const userData = {
       email: email,
       password: password,
@@ -112,5 +111,3 @@ const Login = () => {
     </>
   );
 };
-
-export default Login;

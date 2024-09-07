@@ -20,7 +20,7 @@ export type LoginInput = {
 };
 
 export type SignupInput = {
-  email: string,
+  name: string,
   password: string,
-  confirmPassword: string,
+  email: string,
 };

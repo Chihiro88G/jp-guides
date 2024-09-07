@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -9,15 +11,45 @@ import {
   Typography,
 } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
-const Register = () => {
+export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = async () => {};
+  const navigate = useNavigate();
+
+  const handleRegister = async() => {
+    const newUser = {
+      name: name,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    }
+
+    fetch(`${process.env.REACT_APP_API_URI}/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Register failed. Please check your inputs.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Register successful:", data);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error("Register failed:", error);
+        // setError(error.message);
+      });
+  };
 
   return (
     <>
@@ -73,6 +105,18 @@ const Register = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Grid>
             </Grid>
             <Button
               fullWidth
@@ -93,5 +137,3 @@ const Register = () => {
     </>
   );
 };
-
-export default Register;

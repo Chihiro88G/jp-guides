@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { LoginInput } from './type';
+import { LoginInput, SignupInput } from './type';
 import * as service from './service';
 class AuthController {
 
@@ -23,6 +23,42 @@ class AuthController {
         res.status(401).json({
           success: false,
           message: 'Invalid email or password'
+        });
+      }
+
+    } catch (error) {
+      console.error('Login error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'An error occurred during login'
+      });
+    }
+  }
+
+  async postRegister(req: Request, res: Response): Promise<void> {
+    try {
+      const newUser: SignupInput = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+      };
+
+      // validation check
+      // if the user is already registered (by email)
+
+      const registeredUser = await service.insert(newUser);
+
+      if (registeredUser) {
+        res.status(200).json({
+          success: true,
+          message: 'Register successful',
+          user: registeredUser,
+
+        });
+      } else {
+        res.status(401).json({
+          success: false,
+          message: 'Wrong Input(s)'
         });
       }
 
