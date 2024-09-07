@@ -1,18 +1,16 @@
 import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
 import { LoginInput, SignupInput } from './type';
 import * as service from './service';
 class AuthController {
 
   async postLogin(req: Request, res: Response): Promise<void> {
     try {
-      const userInput: LoginInput = {
-        email: req.body.email,
-        password: req.body.password,
-      }
+      const user = await service.findOneByEmail(req.body.email);
+      if (!user) res.redirect('/login');
 
-      const user = await service.findOneByEmailAndPw(userInput);
-
-      if (user) {
+      const checkedPassword = await bcrypt.compare(req.body.password, user.password);
+      if (checkedPassword) {
         res.status(200).json({
           success: true,
           message: 'Login successful',
@@ -37,14 +35,14 @@ class AuthController {
 
   async postRegister(req: Request, res: Response): Promise<void> {
     try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
       const newUser: SignupInput = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: hashedPassword,
       };
-
-      // validation check
-      // if the user is already registered (by email)
 
       const registeredUser = await service.insert(newUser);
 
@@ -63,10 +61,10 @@ class AuthController {
       }
 
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Register error:', error);
       res.status(500).json({
         success: false,
-        message: 'An error occurred during login'
+        message: 'An error occurred during register'
       });
     }
   }
