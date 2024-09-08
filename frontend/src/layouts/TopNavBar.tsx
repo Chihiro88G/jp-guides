@@ -46,7 +46,7 @@ type LikeCountState = {
 function LikeCountIcon() {
   const likeCount = useSelector((state: LikeCountState) => state.likeCount.value);
   return (
-    <Box sx={{ padding: '20px 8px' }}>
+    <Box sx={{ p: '20px 8px' }}>
       <FavoriteIcon />{likeCount}
     </Box>
   )
@@ -61,7 +61,7 @@ type CartCountState = {
 function CartCountIcon() {
   const cartCount = useSelector((state: CartCountState) => state.cartCount.value);
   return (
-    <Box sx={{ padding: '20px 8px' }}>
+    <Box sx={{ p: '20px 8px' }}>
       <ShoppingCartIcon />{cartCount}
     </Box>
   )

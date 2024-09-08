@@ -19,7 +19,7 @@ export default function PageTitle(props: PageTitleProps) {
       color={color ? color : 'black'}
       sx={{
         width: { xs: '100%', md: `${full ? '100%' : '35%'}`},
-        padding: '20px',
+        p: '20px',
         fontFamily: 'system-ui',
       }}
     >

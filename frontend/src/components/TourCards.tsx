@@ -12,7 +12,7 @@ export default function TourCards({ children }: TourCardsProps) {
         display: { xs: 'block', md: 'flex' },
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: '10px',
+        p: '10px',
         flexWrap: 'wrap',
       }}>
         {children}

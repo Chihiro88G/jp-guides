@@ -61,7 +61,7 @@ export default function Tours() {
       >
         <PageTitle full>FIND TOURS</PageTitle>
         <Box sx={{
-          padding: '0 20px',
+          p: '0 20px',
           display: { xs: 'flex', md: 'block' },
           flexDirection: 'column'
         }}>

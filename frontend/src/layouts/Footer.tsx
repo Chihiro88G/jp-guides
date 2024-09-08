@@ -15,7 +15,7 @@ export default function Footer() {
       <Box
         sx={{
           m: "0 auto",
-          padding: "30px 0",
+          p: "30px 0",
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',

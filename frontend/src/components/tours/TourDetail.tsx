@@ -51,7 +51,7 @@ function RenderTourDetail({ tour }: { tour: TourType }) {
   return (
     <Fragment>
       <PageTitle full>{tour.name}</PageTitle>
-      <Box sx={{ padding: '0 25px' }}>
+      <Box sx={{ p: '0 25px' }}>
         <StyledText bold>{tour.totalDays} days</StyledText>
         <Box sx={{
           display: { xs: 'block', md: 'flex' },
@@ -83,12 +83,12 @@ function RenderTourDetail({ tour }: { tour: TourType }) {
           IMAGES
         </Box>
 
-        <Box sx={{ padding: '25px' }}>
+        <Box sx={{ p: '25px' }}>
           <Title>Overview</Title>
           <StyledText bold>{tour.overviewTitle}</StyledText>
           {tour.overviewContent}
         </Box>
-        <Box sx={{ padding: '25px' }}>
+        <Box sx={{ p: '25px' }}>
           <Title>Itenerary</Title>
           <Itenerary itenerary={itenerary} />
         </Box>

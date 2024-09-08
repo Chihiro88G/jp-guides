@@ -34,7 +34,7 @@ export default function WhenToGo() {
         </Tabs>
         <Box
           sx={{
-            padding: '30px',
+            p: '30px',
             backgroundColor: 'white',
           }}
         >
