@@ -11,11 +11,11 @@ class AuthController {
 
       const checkedPassword = await bcrypt.compare(req.body.password, user.password);
       if (checkedPassword) {
+        req.session.isLoggedIn = true;
         res.status(200).json({
           success: true,
           message: 'Login successful',
           user: user,
-
         });
       } else {
         res.status(401).json({

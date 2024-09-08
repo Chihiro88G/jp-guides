@@ -23,6 +23,7 @@ export default function Login() {
     };
   
     fetch(`${process.env.REACT_APP_API_URI}/login`, {
+      credentials: 'include',
       method: "POST",
       headers: {
         "Content-Type": "application/json",
