@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { logout } from "../slices/authThunk";
+import { useAppDispatch } from "../hooks/hooks";
 
 export default function UserIcon() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const dispatch = useAppDispatch();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -13,6 +14,10 @@ export default function UserIcon() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  }
 
   return (
     <Box sx={{ flexGrow: 0 }}>
@@ -37,11 +42,12 @@ export default function UserIcon() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleCloseUserMenu}>
+          <Typography textAlign="center">Profile</Typography>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <Typography textAlign="center">Logout</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );

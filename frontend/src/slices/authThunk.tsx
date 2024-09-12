@@ -58,7 +58,7 @@ export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await fetch('/api/logout', { method: 'POST' });
+      await fetch(`${process.env.REACT_APP_API_URI}/logout`, { method: 'POST' });
       return null;
     } catch (error) {
       return rejectWithValue('An error occurred during logout');

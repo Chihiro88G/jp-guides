@@ -68,6 +68,13 @@ class AuthController {
       });
     }
   }
+
+  async postLogout(req: Request, res: Response): Promise<void> {
+    req.session.destroy(error => {
+      console.log(error);
+      res.redirect('/');
+    });
+  }
 }
 
 export default new AuthController();
