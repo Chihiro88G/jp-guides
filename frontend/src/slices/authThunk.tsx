@@ -1,18 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setUser, clearUser } from './authSlice';
+
+type LoginProps = {
+  email: string,
+  password: string,
+}
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ username, password }: { username: string; password: string }, { rejectWithValue }) => {
+  async ({ email, password }: LoginProps, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch(`${process.env.REACT_APP_API_URI}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
+
       const data = await response.json();
       if (response.ok) {
-        setUser(data.user);
         return data.user;
       } else {
         return rejectWithValue(data.message);
@@ -34,7 +38,6 @@ export const register = createAsyncThunk(
       });
       const data = await response.json();
       if (response.ok) {
-        setUser(data.user);
         return data.user;
       } else {
         return rejectWithValue(data.message);
@@ -50,7 +53,6 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await fetch('/api/logout', { method: 'POST' });
-      clearUser();
       return null;
     } catch (error) {
       return rejectWithValue('An error occurred during logout');

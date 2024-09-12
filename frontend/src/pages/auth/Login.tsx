@@ -8,6 +8,8 @@ import {
   Grid,
 } from "@mui/material";
 import AuthFormContainer from "../../components/auth/AuthFormContainer";
+import { login } from "../../slices/authThunk";
+import { useAppDispatch } from "../../hooks/hooks";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,35 +17,23 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleLogin = async() => {
     const userData = {
       email: email,
       password: password,
     };
-  
-    fetch(`${process.env.REACT_APP_API_URI}/login`, {
-      credentials: 'include',
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Login failed. Please check your credentials.");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Login successful:", data);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.error("Login failed:", error);
-        setError(error.message);
-      });
+
+    const result = await dispatch(login(userData));
+
+    try {
+      if (login.fulfilled.match(result)) navigate('/');
+      if (login.rejected.match(result)) setError('Login Rejected');
+    } catch (error) {
+      console.error("Login failed:", error);
+      setError("Login failed");
+    }
   };
 
   return (

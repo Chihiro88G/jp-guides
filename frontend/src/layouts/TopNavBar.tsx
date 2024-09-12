@@ -11,8 +11,11 @@ import NavContainer from '../components/NavContainer';
 import { getPages } from '../utils/getPages';
 import PageButton from './PageButton';
 import { Link } from 'react-router-dom';
+import { RootState } from '../store';
 
 export default function TopNavBar() {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
   return (
     <NavContainer component='header'>
       <Logo />
@@ -27,12 +30,16 @@ export default function TopNavBar() {
         <LikeCountIcon />
         <CartCountIcon />
       </Box>
-      {/* <UserIcon /> */}
-      <Box>
-        <Link to='/login'>
-          <LoginIcon sx={{ color: 'white' }}/>
-        </Link>
-      </Box>
+      
+      {isAuthenticated ?
+        <UserIcon />
+        : 
+        <Box>
+          <Link to='/login'>
+            <LoginIcon sx={{ color: 'white' }}/>
+          </Link>
+        </Box>
+      }
     </NavContainer>
   );
 }

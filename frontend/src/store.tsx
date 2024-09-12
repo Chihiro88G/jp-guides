@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './slices/authSlice';
 import likeCountReducer from './slices/likeCountSlice';
 import isLikedReducer from './slices/isLikedSlice';
 import cartCountReducer from './slices/cartCountSlice';
@@ -11,6 +12,8 @@ const store = configureStore({
 
     cartCount: cartCountReducer,
     isInCart: isInCartReducer,
+
+    auth: authReducer,
   }
 });
 
