@@ -5,51 +5,54 @@ import {
   Button,
   Grid,
   TextField,
+  Typography,
 } from "@mui/material";
 import AuthFormContainer from "../../components/auth/AuthFormContainer";
+import { register } from "../../slices/authThunk";
+import { useAppDispatch } from "../../hooks/hooks";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleRegister = async() => {
+    if (!(name && email && password && confirmPassword)) {
+      setError('Please fill out all items');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords not matched');
+      return;
+    }
+
     const newUser = {
       name: name,
       email: email,
       password: password,
-      confirmPassword: confirmPassword,
     }
 
-    fetch(`${process.env.REACT_APP_API_URI}/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Register failed. Please check your inputs.");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Register successful:", data);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.error("Register failed:", error);
-        // setError(error.message);
-      });
+    const result = await dispatch(register(newUser));
+
+    try {
+      if (register.fulfilled.match(result)) navigate('/');
+      if (register.rejected.match(result)) setError('Register Rejected');
+    } catch (error) {
+      console.error('Register failed: ', error);
+      setError('Register failed');
+    }
   };
 
   return (
     <AuthFormContainer>
       <Box sx={{ mt: 3 }}>
+        {error && <Typography color="error">{error}</Typography>}
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField

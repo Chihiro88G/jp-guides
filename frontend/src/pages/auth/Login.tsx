@@ -31,7 +31,7 @@ export default function Login() {
       if (login.fulfilled.match(result)) navigate('/');
       if (login.rejected.match(result)) setError('Login Rejected');
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login failed: ", error);
       setError("Login failed");
     }
   };

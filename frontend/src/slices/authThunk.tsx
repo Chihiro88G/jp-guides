@@ -5,6 +5,12 @@ type LoginProps = {
   password: string,
 }
 
+// createAsyncThunk automatically generates pending, fulfilled, and rejected action types
+// arg1: action type string (base)
+// arg2: async function to create a thunk function what will 
+  // 1. dispach the pending action
+  // 2. execute provided async function
+  // 3. dispatch either fulfilled or rejected action based on the result
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }: LoginProps, { rejectWithValue }) => {
@@ -29,12 +35,12 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   'auth/register',
-  async ({ username, email, password }: { username: string; email: string; password: string }, { rejectWithValue }) => {
+  async ({ name, email, password }: { name: string; email: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch(`${process.env.REACT_APP_API_URI}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
       const data = await response.json();
       if (response.ok) {
