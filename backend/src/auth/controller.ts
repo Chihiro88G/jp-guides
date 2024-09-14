@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
+import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import { LoginInput, SignupInput } from './type';
 import * as service from './service';
+import { resetEmail } from '../mail';
 class AuthController {
 
   async postLogin(req: Request, res: Response): Promise<void> {
@@ -74,6 +76,20 @@ class AuthController {
       console.log(error);
       res.redirect('/');
     });
+  }
+
+  async postReset(req: Request, res: Response): Promise<void> {
+    const email = await service.findOneByEmail(req.body.email);
+
+    crypto.randomBytes(32, ((err, buffer) => {
+      if (err) {
+        console.log(err);
+        res.redirect('/reset');
+      } 
+
+      const token = buffer.toString('hex');
+      // resetEmail(email.email, token);
+    }))
   }
 }
 

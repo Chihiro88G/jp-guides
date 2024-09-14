@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import TourDetail from './components/tours/TourDetail';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Reset from './pages/auth/Reset';
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ function SwitchRoutes() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/reset' element={<Reset />} />
       </Route>
     </Routes>
   );
