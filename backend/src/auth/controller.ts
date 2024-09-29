@@ -53,7 +53,6 @@ class AuthController {
           success: true,
           message: 'Register successful',
           user: registeredUser,
-
         });
       } else {
         res.status(401).json({
@@ -79,7 +78,14 @@ class AuthController {
   }
 
   async postReset(req: Request, res: Response): Promise<void> {
-    const email = await service.findOneByEmail(req.body.email);
+    const user = await service.findOneByEmail(req.body.email);
+    if (!user) {
+      res.status(401).json({
+        success: false,
+        message: 'Email not found in db'
+      });
+      return;
+    };
 
     crypto.randomBytes(32, ((err, buffer) => {
       if (err) {
@@ -88,7 +94,12 @@ class AuthController {
       } 
 
       const token = buffer.toString('hex');
-      // resetEmail(email.email, token);
+      resetEmail(user.email, token);
+
+      res.status(200).json({
+        success: true,
+        message: 'Reset successful',
+      });
     }))
   }
 }

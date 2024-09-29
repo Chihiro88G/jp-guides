@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -8,23 +8,37 @@ import {
   Grid,
 } from "@mui/material";
 import AuthFormContainer from "../../components/auth/AuthFormContainer";
-import { useAppDispatch } from "../../hooks/hooks";
 
 export default function Reset() {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('')
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const handleReset = async () => {
+    setError('');
 
-  const handleReset = () => {
-    
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URI}/reset`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        return setSuccessMsg('Email to change password was sent to you!')
+      } else {
+        return setError('Email was not found in our system.')
+      }
+    } catch (error) {
+      return console.log(error);
+    }
   }
 
   return (
     <AuthFormContainer>
       <Box sx={{ mt: 1 }}>
-      {error && <Typography color="error">{error}</Typography>}
+      {successMsg.length > 1 && <Typography color="error">{successMsg}</Typography>}
+      {error.length > 1  && <Typography color="error">{error}</Typography>}
         <TextField
           margin="normal"
           required
@@ -42,6 +56,7 @@ export default function Reset() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           onClick={handleReset}
+          disabled={successMsg.length > 1}
         >
           Reset Password
         </Button>
