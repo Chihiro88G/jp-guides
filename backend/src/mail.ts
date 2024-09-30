@@ -21,7 +21,7 @@ export async function resetEmail(email: string, token: string) {
     from: process.env.MAIL_FROM as string,
     subject: 'Reset Password',
     text: 'This is a test email to reset password.',
-    html: `<p>Click this <a href='${process.env.BACKEND_API}/reset/${token}'>link</a> to reset password.</p>`,
+    html: `<p>Click this <a href='${process.env.FRONTEND_API}/change-password?${token}'>link</a> to reset password.</p>`,
   }
 
   send(msg);

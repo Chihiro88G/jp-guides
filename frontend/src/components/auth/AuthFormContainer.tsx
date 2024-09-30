@@ -11,7 +11,7 @@ import {
 
 export default function AuthFormContainer({ children }: { children: ReactNode}) {
   const location = useLocation();
-  const pathname = location.pathname.split('/')[1];
+  const pathname = location.pathname.split('/')[1].replace('-', ' ');
 
   return (
       <Container maxWidth="xs">

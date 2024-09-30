@@ -10,6 +10,7 @@ import TourDetail from './components/tours/TourDetail';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset';
+import SetNewPassword from './pages/auth/SetNewPassword';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ function SwitchRoutes() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/reset' element={<Reset />} />
+        <Route path='/change-password' element={<SetNewPassword />} />
       </Route>
     </Routes>
   );
