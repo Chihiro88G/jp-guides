@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
@@ -8,46 +8,57 @@ import {
   Typography,
 } from "@mui/material";
 import AuthFormContainer from "../../components/auth/AuthFormContainer";
-import { login } from "../../slices/authThunk";
-import { useAppDispatch } from "../../hooks/hooks";
 
 export default function SetNewPassword() {
-  const location = useLocation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const [userData, setUserData] = useState<any>(null);
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const token = location.search.replace('?', '');
-  console.log(token);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URI}/check-token?token=${token}`)
+    .then(res => res.json())
+    .then(data => setUserData(data))
+    .catch(error => console.log(error));
+  }, []);
 
   const handleChangePassword = async() => {
-    if (!(password && confirmPassword)) {
+    if (!userData) return;
+
+    if (!(newPassword && confirmPassword)) {
       setError('Please fill out all items');
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError('Passwords not matched');
       return;
     }
 
-    const newUser = {
-      email: email,
-      password: password,
-    }
-
-    const result = await dispatch(login(newUser));
+    const user = {
+      id: userData.id,
+      password: newPassword,
+      token: token,
+    };
 
     try {
-      if (login.fulfilled.match(result)) navigate('/');
-      if (login.rejected.match(result)) setError('Login Rejected');
+      const response = await fetch(`${process.env.REACT_APP_API_URI}/update-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user }),
+      });
+
+      if (response.ok) {
+        navigate('/login')
+      } else {
+        setError('Were not able to change password');
+      }
     } catch (error) {
-      console.error('Change password failed: ', error);
-      setError('Change password failed');
+      return console.log(error);
     }
   };
 
@@ -60,12 +71,12 @@ export default function SetNewPassword() {
             <TextField
               required
               fullWidth
-              name="password"
-              label="Password"
+              name="newPassword"
+              label="New Password"
               type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              id="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -89,11 +100,6 @@ export default function SetNewPassword() {
         >
           Change Password
         </Button>
-        {/* <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link to="/login">Already have an account? Login</Link>
-          </Grid>
-        </Grid> */}
       </Box>
     </AuthFormContainer>
   );

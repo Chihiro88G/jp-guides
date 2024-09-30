@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
-import { LoginInput, SignupInput } from './type';
+import { LoginInput, SignupInput, UpdatePasswordInput } from './type';
 import * as service from './service';
 import { resetEmail } from '../mail';
 class AuthController {
@@ -87,20 +87,76 @@ class AuthController {
       return;
     };
 
-    crypto.randomBytes(32, ((err, buffer) => {
+    crypto.randomBytes(32, (async (err, buffer) => {
       if (err) {
         console.log(err);
         res.redirect('/reset');
       } 
 
       const token = buffer.toString('hex');
+      await service.updatePasswordResetToken(token, user.id);
       resetEmail(user.email, token);
 
       res.status(200).json({
         success: true,
-        message: 'Reset successful',
+        message: 'Reset ready',
       });
     }))
+  }
+
+  async getCheckToken(req: Request, res: Response): Promise<void> {
+    const token = req.query.token?.toString();
+    console.log(token);
+    if (!token) {
+      res.status(401).json({
+        success: false,
+        message: 'Token not found in db'
+      });
+      return;
+    }
+
+    const user = await service.findOneByToken(token);
+    if (!user) {
+      res.status(401).json({
+        success: false,
+        message: 'User not found with the tokens'
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'User found with requested token',
+    });
+  }
+
+  async postUpdate(req: Request, res: Response): Promise<void> {
+    console.log(req.body.user.token)
+    const user = await service.findOneByToken(req.body.user.token);
+    if (!user) {
+      res.status(401).json({
+        success: false,
+        message: 'User not found with the tokens'
+      });
+      return;
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.user.password, salt);
+
+    const userToUpdate: UpdatePasswordInput = {
+      id: user.id,
+      newPassword: hashedPassword,
+    };
+
+    console.log(user);
+
+    await service.updatePassword(userToUpdate);
+
+    res.status(200).json({
+      success: true,
+      message: 'Password Changed',
+    });
   }
 }
 

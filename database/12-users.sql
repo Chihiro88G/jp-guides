@@ -6,7 +6,9 @@ CREATE TABLE users (
   password VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT NOW(),
-  edited TIMESTAMP NOT NULL DEFAULT NOW()  
+  edited TIMESTAMP NOT NULL DEFAULT NOW(),
+  reset_token VARCHAR(200),
+  reset_token_expiry_date TIMESTAMP
 );
 
 INSERT INTO users (name, password, email)

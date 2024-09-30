@@ -24,3 +24,8 @@ export type SignupInput = {
   password: string,
   email: string,
 };
+
+export type UpdatePasswordInput = {
+  id: number,
+  newPassword: string,
+};
