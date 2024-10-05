@@ -8,6 +8,16 @@ import TourCards from '../TourCards';
 import LoadingSpinner from '../LoadingSpinner';
 
 export default function PopularTours() {
+
+  return (
+    <SectionWrapper bgColor='beige' height='470px' >
+      <Title>Popular Tours</Title>
+      <RenderPopularTours />
+    </SectionWrapper>
+  );
+}
+
+function RenderPopularTours() {
   const [items, setItems] = useState<TourType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -38,14 +48,13 @@ export default function PopularTours() {
   if (items.length === 0) return null;
 
   return (
-    <SectionWrapper bgColor='beige' height='470px' >
-      <Title>Popular Tours</Title>
+    <>
       <TourCards>
         {items.map((item: TourType) => (
           <TourCard tourData={item} key={item.id}/>
         ))}
       </TourCards>
-      <Link sx={{ float: 'right'}}>Browse all tours...</Link>
-    </SectionWrapper>
+      <Link sx={{ float: 'right' }}>Browse all tours...</Link>
+    </>
   );
 }

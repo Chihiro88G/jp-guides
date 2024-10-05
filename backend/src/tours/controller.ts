@@ -11,7 +11,13 @@ class ToursController {
 
   async getOne(req: Request, res: Response): Promise<void> {
     const result = await service.findOneById(parseInt(req.params.tourId));
+
     res.send(result);
+
+    // res.status(404).json({
+    //   success: false,
+    //   message: 'Page not found 404'
+    // });
   }
 }
 
