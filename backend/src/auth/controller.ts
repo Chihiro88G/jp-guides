@@ -149,8 +149,6 @@ class AuthController {
       newPassword: hashedPassword,
     };
 
-    console.log(user);
-
     await service.updatePassword(userToUpdate);
 
     res.status(200).json({

@@ -11,6 +11,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset';
 import SetNewPassword from './pages/auth/SetNewPassword';
+import NotFound404 from './pages/error/NotFound404';
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ function SwitchRoutes() {
         <Route path='/register' element={<Register />} />
         <Route path='/reset' element={<Reset />} />
         <Route path='/change-password' element={<SetNewPassword />} />
+        <Route element={<NotFound404 />} />
       </Route>
     </Routes>
   );
