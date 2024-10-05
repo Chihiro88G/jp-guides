@@ -43,7 +43,8 @@ function RenderTourDetail({ tour }: { tour: TourType }) {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/itenerary/${tour.id}`)
     .then(res => res.json())
-    .then((data: IteneraryType[]) => setItenerary(data));
+    .then((data: IteneraryType[]) => setItenerary(data))
+    // .catch(error => console.log('msg: ' + error))
   }, [tour]);
 
   if (!itenerary) return <Box>Loading...</Box>
