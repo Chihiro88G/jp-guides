@@ -5,6 +5,7 @@ import Title from '../Title';
 import TourCard from '../TourCard';
 import TourCards from '../TourCards';
 import { TourType } from '../../types/tours';
+import LoadingSpinner from '../LoadingSpinner';
 
 type ToursListProps = {
   query: {
@@ -14,18 +15,35 @@ type ToursListProps = {
 }
 
 export default function ToursList({ query }: ToursListProps) {
-  const [tours, setTours] = useState<TourType[]>();
+  const [tours, setTours] = useState<TourType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
+    setLoading(true);
     fetch(`${process.env.REACT_APP_API_URI}/tours`)
-    .then(res => res.json())
-    .then((data: TourType[]) => setTours(data));
+    .then(res => {
+      if (!res.ok) throw new Error('failed to fetch tours');
+      return res.json();
+    })
+    .then((data: TourType[]) => {
+      setTours(data);
+      setLoading(false);
+    })
+    .catch(err => {    
+      setError(err);
+      setLoading(false);
+    });
   }, []);
 
-  if (!tours) return <Box>No Tours</Box>
+  if (loading) return <LoadingSpinner />;
+  if (error) return <Box>No Tours</Box>;
+  if (tours.length === 0) return <Box>No Tours</Box>;
 
   return (
-    <RenderTours tours={tours} query={query} />
+    <SectionWrapper bgColor='beige'>
+      <RenderTours tours={tours} query={query} />
+    </SectionWrapper>
   )
 }
 
@@ -55,7 +73,7 @@ function RenderTours({ tours, query }: RenderToursProps) {
   }, [tours, query]);
 
   return (
-    <SectionWrapper bgColor='beige'>
+    <>
       <Title>{filteredTours.length} Tours Found!</Title>
       <TourCards>
         {filteredTours.length > 0 ?
@@ -66,6 +84,6 @@ function RenderTours({ tours, query }: RenderToursProps) {
           'No Tours Found.'
         }
       </TourCards>
-    </SectionWrapper>
+    </>
   )
 }
