@@ -20,9 +20,11 @@ export async function findAll(): Promise<TourModel[]> {
   return tours;
 }
 
-export async function findOneById(tourId: number): Promise<TourModel> {
+export async function findOneById(tourId: number): Promise<TourModel | null> {
   const query = `SELECT * FROM tours WHERE id = ?`;
   const result: TourRecord = (await db.query(query, tourId))[0][0];
+
+  if (!result) return null;
 
   const activityLevel = await activityLevelsService.findOneById(result.activity_level_id);
   const discount = await discountsService.findOneById(result.discount_id);

@@ -12,17 +12,33 @@ import AddToCartButton from '../AddToCartButton';
 import StyledText from '../StyledText';
 import Itenerary from './Itenerary';
 import { IteneraryType } from '../../types/itenerary';
+import LoadingSpinner from '../LoadingSpinner';
 
 export default function TourDetail() {
   const { tourId } = useParams();
   const [tour, setTour] = useState<TourType>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
+    setLoading(true);
     fetch(`${process.env.REACT_APP_API_URI}/tours/${tourId}`)
-    .then(res => res.json())
-    .then((data: TourType) => setTour(data));
+    .then(res => {
+      if (!res.ok) throw new Error('failed to fetch tours');
+      return res.json();
+    })
+    .then((data: TourType) => {
+      setTour(data);
+      setLoading(false);
+    })
+    .catch(err => {    
+      setError(err);
+      setLoading(false);
+    });
   }, [tourId]);
 
+  if (loading) return <LoadingSpinner />;
+  if (error) return <Box>No Tour</Box>;
   if (!tour) return <Box>Loading...</Box>
 
   return (

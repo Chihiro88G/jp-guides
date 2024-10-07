@@ -10,7 +10,7 @@ export async function findOneByTourId(tourId: number): Promise<IteneraryModel[] 
     LEFT JOIN tours_itenerary as tit
     ON it.id = tit.itenerary_id
     WHERE tour_id = ?
-    ;  
+    ;
   `;
 
   const result = (await db.query(query, tourId))[0];

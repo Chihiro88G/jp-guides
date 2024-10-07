@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import * as service from './service';
 class ToursController {
 
@@ -9,15 +9,25 @@ class ToursController {
     res.send(result);
   }
 
-  async getOne(req: Request, res: Response): Promise<void> {
-    const result = await service.findOneById(parseInt(req.params.tourId));
+  async getOne(req: Request, res: Response, next: NextFunction): Promise<void> {
+    const tourId = parseInt(req.params.tourId);
 
-    res.send(result);
+    try {
+      const result = await service.findOneById(parseInt(req.params.tourId));
 
-    // res.status(404).json({
-    //   success: false,
-    //   message: 'Page not found 404'
-    // });
+      if (!result) {
+        res.status(404).json({
+          success: false,
+          message: 'Tour not found: id ' + tourId
+        });
+        return;
+      } 
+  
+      res.send(result);
+        
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
