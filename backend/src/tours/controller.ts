@@ -13,7 +13,7 @@ class ToursController {
     const tourId = parseInt(req.params.tourId);
 
     try {
-      const result = await service.findOneById(parseInt(req.params.tourId));
+      const result = await service.findOneById(tourId);
 
       if (!result) {
         res.status(404).json({
@@ -24,9 +24,10 @@ class ToursController {
       } 
   
       res.send(result);
-        
+
     } catch (error) {
-      next(error);
+      const err = new Error(error as string);
+      next(err);
     }
   }
 }

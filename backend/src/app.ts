@@ -8,17 +8,19 @@ declare module 'express-session' {
 import { createRequire } from 'module';
 import express, { Express, Request, Response } from 'express';
 import session from 'express-session';
-const require = createRequire(import.meta.url);
-const MySQLStore = require('express-mysql-session')(session);
 import cors from 'cors';
 import { routes } from './routes';
+const require = createRequire(import.meta.url);
+const MySQLStore = require('express-mysql-session')(session);
 
 const app: Express = express();
 const port = 8000;
 
 const corsOptions = {
   origin: 'http://localhost:3000',
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
@@ -45,11 +47,6 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }))
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
 
 app.use(routes);
 
