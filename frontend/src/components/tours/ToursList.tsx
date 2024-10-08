@@ -26,8 +26,8 @@ export default function ToursList({ query }: ToursListProps) {
       if (!res.ok) throw new Error('failed to fetch tours');
       return res.json();
     })
-    .then((data: TourType[]) => {
-      setTours(data);
+    .then((responseData: { success: boolean; data: TourType[] }) => {
+      setTours(responseData.data);
       setLoading(false);
     })
     .catch(err => {    
