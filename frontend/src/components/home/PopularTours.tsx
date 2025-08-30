@@ -15,14 +15,15 @@ export default function PopularTours() {
   useEffect(() => {
     setLoading(true);
     fetch(`${process.env.REACT_APP_API_URI}/tours?popular=true`)
+    
     // returns Promise<Response>
     // only rejects on network failure or if anything prevented the request from completing
     .then(res => {
       if (!res.ok) throw new Error('failed to fetch tours');
       return res.json();
     })
-    .then((data: TourType[]) => {
-      setItems(data);
+    .then((responseData: { success: boolean; data: TourType[] }) => {
+      setItems(responseData.data);
       setLoading(false);
     })
     // In a Promise chain, the catch block is only invoked 
