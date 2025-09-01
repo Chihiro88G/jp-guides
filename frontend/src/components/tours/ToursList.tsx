@@ -41,7 +41,7 @@ export default function ToursList({ query }: ToursListProps) {
   if (tours.length === 0) return <Box>No Tours</Box>;
 
   return (
-    <SectionWrapper bgColor='beige'>
+    <SectionWrapper>
       <RenderTours tours={tours} query={query} />
     </SectionWrapper>
   )
