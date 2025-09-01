@@ -22,7 +22,7 @@ export default function CardWithMedia({ children, imgUrl }: CardWithMediaProps) 
         component='img'
         sx={{ height: 170 }}
         image={imgUrl}
-        title="default image"
+        title="tour image"
       />
       {children}
     </Card>

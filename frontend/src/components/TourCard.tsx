@@ -10,8 +10,8 @@ type TourCardProps = {
 }
 
 export default function TourCard({ tourData }: TourCardProps) {
-  const randInt = () => 100 + Math.floor(Math.random() * 100);
-  const imgUrl = `https://source.unsplash.com/random/${randInt()} x ${randInt()}?japan`;
+  const randInt = Math.floor(Math.random() * 16) + 1;
+  const imgUrl = `tourimg/jpn-${randInt}.jpg`;
 
   return (
     <CardWithMedia imgUrl={imgUrl}>
