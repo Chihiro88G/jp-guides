@@ -9,9 +9,10 @@ export default function Title({ children }: TitleProps) {
   return (
     <Typography
       component="h2"
-      variant="h6"
+      variant="h4"
       color="#009688" 
-      mb={2}
+      mb={6}
+      mt={6}
       textAlign="center"
     >
       {children}

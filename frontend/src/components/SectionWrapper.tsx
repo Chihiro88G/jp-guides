@@ -23,7 +23,7 @@ export default function SectionWrapper(props: SectionWrapperProps) {
       <Box
         sx={{
           display: 'block',
-          height: `${height ? height : ''}`,
+          minHeight: `${height ? height : ''}`,
           m: '0 auto',
           p: '10px',
         }} 

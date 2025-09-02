@@ -44,7 +44,7 @@ export default function WhenToGo() {
   };
 
   return (
-    <SectionWrapper bgColor='#CEE9B7'>
+    <SectionWrapper bgColor='#CEE9B7' height='100vh'>
       <Title>When To Go</Title>
       <Box sx={{ width: '100%' }} ref={sectionRef}>
         <Tabs value={month} onChange={handleChange} centered>

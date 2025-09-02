@@ -8,7 +8,7 @@ import LoadingSpinner from '../LoadingSpinner';
 
 export default function TravelTips() {
   return (
-    <SectionWrapper>
+    <SectionWrapper height='60vh'>
       <TravelTipsWrapper>
         <Title>Travel Tips for Japan</Title>
         <RenderTravelTips />

@@ -7,7 +7,6 @@ export default function TravelTipsWrapper({ children }: { children: ReactNode} )
       <Box
         sx={{
           width: { xs: '100%', md: '80%'},
-          p: '40px',
           m: '0 auto'
         }}>
           {children}

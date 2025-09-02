@@ -39,7 +39,7 @@ export default function PopularTours() {
   if (items.length === 0) return null;
 
   return (
-    <SectionWrapper height='470px' >
+    <SectionWrapper height='90vh'>
       <Title>Popular Tours</Title>
       <TourCards>
         {items.map((item: TourType) => (
