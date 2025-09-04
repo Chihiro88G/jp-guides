@@ -5,17 +5,22 @@ type SelectionProps = {
   label: string;
   items: string[];
   onChange: (value: string) => void;
+  value: string | undefined;
 }
 
-export default function Selection({ label, items, onChange }: SelectionProps) {
-  const [selectedValue, setSelectedValue] = useState('');
+export default function Selection({ label, items, onChange, value }: SelectionProps) {
+  // const [selectedValue, setSelectedValue] = useState('');
 
-  useEffect(() => {
-    onChange(selectedValue === 'All' ? '' : selectedValue);
-  }, [selectedValue, onChange])
+  // useEffect(() => {
+  //   onChange(selectedValue === 'All' ? '' : selectedValue);
+  // }, [selectedValue, onChange])
+
+  // const handleChange = (event: SelectChangeEvent<string>) => {
+  //   setSelectedValue(event.target.value);
+  // };
 
   const handleChange = (event: SelectChangeEvent<string>) => {
-    setSelectedValue(event.target.value);
+    onChange(event.target.value === 'All' ? '' : event.target.value);
   };
 
   return (
@@ -29,7 +34,7 @@ export default function Selection({ label, items, onChange }: SelectionProps) {
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={selectedValue}
+        value={value || 'All'}
         label={label}
         onChange={e => handleChange(e)}
       >

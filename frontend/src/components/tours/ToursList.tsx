@@ -60,11 +60,11 @@ function RenderTours({ tours, query }: RenderToursProps) {
 
   useEffect(() => {
     let toursToFilter = tours;
-    if (query.activityLevel) {
+    if (query.activityLevel && query.activityLevel !== '') {
       toursToFilter = toursToFilter.filter((tour: TourType) =>
       tour.activityLevel === query.activityLevel!.toLowerCase());
     };
-    if (query.destination) {
+    if (query.destination && query.destination !== '') {
       toursToFilter = toursToFilter.filter((tour: TourType) =>
       tour.destinations.includes(query.destination!));
     };

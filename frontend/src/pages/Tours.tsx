@@ -65,9 +65,9 @@ export default function Tours() {
           display: { xs: 'flex', md: 'block' },
           flexDirection: 'column'
         }}>
-          <Selection label='Destination' items={destinationItems} onChange={handleDestinationChange}/>
-          <Selection label='Duration' items={durationItems} onChange={handleDestinationChange} />
-          <Selection label='Activity level' items={activityLevelsItems}  onChange={handleActivityLevelChange}/>
+          <Selection label='Destination' items={destinationItems} onChange={handleDestinationChange} value={query.destination}/>
+          {/* <Selection label='Duration' items={durationItems} onChange={handleDestinationChange} /> */}
+          <Selection label='Activity level' items={activityLevelsItems}  onChange={handleActivityLevelChange} value={query.activityLevel} />
         </Box>
       </SectionWrapper>
       <ToursList query={query} />
