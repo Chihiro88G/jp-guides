@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { TourType } from '../../types/tours';
@@ -27,8 +27,8 @@ export default function TourDetail() {
       if (!res.ok) throw new Error('failed to fetch tours');
       return res.json();
     })
-    .then((data: TourType) => {
-      setTour(data);
+    .then((data: {success: Boolean, data: TourType}) => {
+      setTour(data.data);
       setLoading(false);
     })
     .catch(err => {    
@@ -49,15 +49,17 @@ export default function TourDetail() {
 }
 
 function RenderTourDetail({ tour }: { tour: TourType }) {
-  const [priceCad, setPriceCad] = useState<number>(0);
   const [itenerary, setItenerary] = useState<IteneraryType[]>();
 
-  useEffect(() => {
-    tour.discountRate !== 0 ? setPriceCad(tour.priceCad - (tour.priceCad * tour.discountRate)) : setPriceCad(tour.priceCad);
-  }, [tour]);
+  const priceCad = useMemo(() => 
+    tour.discountRate !== 0
+      ? tour.priceCad - (tour.priceCad * tour.discountRate)
+      : tour.priceCad,
+    [tour]
+  );
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URI}/itenerary/${tour.id}`)
+    fetch(`${process.env.REACT_APP_API_URI}/itenerary/2`)
     .then(res => res.json())
     .then((data: IteneraryType[]) => setItenerary(data))
     // .catch(error => console.log('msg: ' + error))

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Box } from '@mui/material';
 import SectionWrapper from '../SectionWrapper';
 import Title from '../Title';
@@ -56,20 +56,19 @@ type RenderToursProps = {
 }
 
 function RenderTours({ tours, query }: RenderToursProps) {
-  const [filteredTours, setFilteredTours] = useState<TourType[]>(tours);
-
-  useEffect(() => {
+  const filteredTours = useMemo(() => {
     let toursToFilter = tours;
     if (query.activityLevel && query.activityLevel !== '') {
       toursToFilter = toursToFilter.filter((tour: TourType) =>
-      tour.activityLevel === query.activityLevel!.toLowerCase());
-    };
+        tour.activityLevel === query.activityLevel!.toLowerCase()
+      );
+    }
     if (query.destination && query.destination !== '') {
       toursToFilter = toursToFilter.filter((tour: TourType) =>
-      tour.destinations.includes(query.destination!));
-    };
-
-    setFilteredTours(toursToFilter);
+        tour.destinations.includes(query.destination!)
+      );
+    }
+    return toursToFilter;
   }, [tours, query]);
 
   return (

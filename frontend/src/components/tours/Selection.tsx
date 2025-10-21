@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 type SelectionProps = {
@@ -9,16 +8,6 @@ type SelectionProps = {
 }
 
 export default function Selection({ label, items, onChange, value }: SelectionProps) {
-  // const [selectedValue, setSelectedValue] = useState('');
-
-  // useEffect(() => {
-  //   onChange(selectedValue === 'All' ? '' : selectedValue);
-  // }, [selectedValue, onChange])
-
-  // const handleChange = (event: SelectChangeEvent<string>) => {
-  //   setSelectedValue(event.target.value);
-  // };
-
   const handleChange = (event: SelectChangeEvent<string>) => {
     onChange(event.target.value === 'All' ? '' : event.target.value);
   };
