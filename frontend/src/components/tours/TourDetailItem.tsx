@@ -13,7 +13,7 @@ export default function TourDetailItem({ title, content }: TourDetailItemProps) 
         width: { xs: '100%', md: '15%'}
       }}>
       <Typography>{title}</Typography>
-      <Typography>{content}</Typography>
+      <Typography component='span'>{content}</Typography>
     </Box>
   )
 }
