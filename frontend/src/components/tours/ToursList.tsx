@@ -11,6 +11,7 @@ type ToursListProps = {
   query: {
     destination: string | undefined,
     activityLevel: string | undefined,
+    duration: string | undefined,
   };
 }
 
@@ -52,6 +53,7 @@ type RenderToursProps = {
   query: {
     destination: string | undefined,
     activityLevel: string | undefined,
+    duration: string | undefined,
   };
 }
 
@@ -63,9 +65,19 @@ function RenderTours({ tours, query }: RenderToursProps) {
         tour.activityLevel === query.activityLevel!.toLowerCase()
       );
     }
+
     if (query.destination && query.destination !== '') {
       toursToFilter = toursToFilter.filter((tour: TourType) =>
         tour.destinations.includes(query.destination!)
+      );
+    }
+
+    if (query.duration && query.duration !== '') {
+      const daysFrom = parseInt(query.duration.split(' - ')[0]);
+      const daysTo = parseInt(query.duration.split(' - ')[1].split(' days')[0]);
+
+      toursToFilter = toursToFilter.filter((tour: TourType) =>
+        tour.totalDays >= daysFrom && tour.totalDays <= daysTo
       );
     }
     return toursToFilter;

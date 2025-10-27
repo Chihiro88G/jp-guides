@@ -19,10 +19,8 @@ export default function Selection({ label, items, onChange, value }: SelectionPr
         m: { xs: '5px 0', md: '5px 5px' },
       }}
     >
-      <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+      <InputLabel>{label}</InputLabel>
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
         value={value || 'All'}
         label={label}
         onChange={e => handleChange(e)}

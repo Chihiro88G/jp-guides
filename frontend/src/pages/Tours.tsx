@@ -11,17 +11,16 @@ export default function Tours() {
   const [query, setQuery] = useState<{
     destination: string | undefined,
     activityLevel: string | undefined,
+    duration: string | undefined,
   }>({
     destination: undefined,
     activityLevel: undefined,
+    duration: undefined,
   });
   const [activityLevelsItems, setActivityLevelsItems] = useState<string[]>([]);
   const [destinationItems, setDestinationItems] = useState<string[]>([]);
 
-  const durationsObj = getDurations();
-  const durationItems = durationsObj.map((durationObj) => {
-    return `${durationObj.daysFrom} - ${durationObj.daysTo} days`
-  })
+  const durationItems = getDurations();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URI}/activity-levels`)
@@ -53,6 +52,13 @@ export default function Tours() {
     }
   }
 
+  const handleDurationChange = (duration: string) => {
+    setQuery({
+      ...query,
+      duration: duration,
+    });
+  }
+
   return (
     <Fragment>
       <SectionWrapper 
@@ -66,7 +72,7 @@ export default function Tours() {
           flexDirection: 'column'
         }}>
           <Selection label='Destination' items={destinationItems} onChange={handleDestinationChange} value={query.destination}/>
-          {/* <Selection label='Duration' items={durationItems} onChange={handleDestinationChange} /> */}
+          <Selection label='Duration' items={durationItems} onChange={handleDurationChange} value={query.duration} />
           <Selection label='Activity level' items={activityLevelsItems}  onChange={handleActivityLevelChange} value={query.activityLevel} />
         </Box>
       </SectionWrapper>
