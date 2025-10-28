@@ -58,7 +58,11 @@ export default function WhenToGo() {
             backgroundColor: 'white',
           }}
         >
-          A good time to travel, but there may be some factors to be aware of
+          {months[month] && (
+            <Typography sx={{ width: '90%', margin: '0 auto', mb: '50px' }}>
+              {items[month].comments}
+            </Typography>
+          )}
           {isInView && <WeatherBarChart weatherdata={items}/>}
         </Box>
       </Box>

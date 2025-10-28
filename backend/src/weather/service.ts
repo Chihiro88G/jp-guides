@@ -17,5 +17,6 @@ async function toModel(
     month: getMonthString(weather.month),
     maxTemp: weather.max_temp_tokyo,
     rain: weather.rain_tokyo,
+    comments: weather.comments,
   }
 }
