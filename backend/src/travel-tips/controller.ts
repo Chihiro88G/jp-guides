@@ -5,7 +5,11 @@ class TravelTipsController {
 
   async get(req: Request, res: Response): Promise<void> {
     const result = await service.findAll();
-    res.send(result);
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
   }
 }
 

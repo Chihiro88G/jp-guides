@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Box } from '@mui/material';
 import SectionWrapper from '../SectionWrapper';
 import Title from '../Title';
@@ -6,6 +6,7 @@ import TourCard from '../TourCard';
 import TourCards from '../TourCards';
 import { TourType } from '../../types/tours';
 import LoadingSpinner from '../LoadingSpinner';
+import useFetch from '../../hooks/useFetch';
 
 type ToursListProps = {
   query: {
@@ -16,30 +17,13 @@ type ToursListProps = {
 }
 
 export default function ToursList({ query }: ToursListProps) {
-  const [tours, setTours] = useState<TourType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${process.env.REACT_APP_API_URI}/tours`)
-    .then(res => {
-      if (!res.ok) throw new Error('failed to fetch tours');
-      return res.json();
-    })
-    .then((responseData: { success: boolean; data: TourType[] }) => {
-      setTours(responseData.data);
-      setLoading(false);
-    })
-    .catch(err => {    
-      setError(err);
-      setLoading(false);
-    });
-  }, []);
+  const { data, loading, error } = useFetch({ pathname: 'tours' });
 
   if (loading) return <LoadingSpinner />;
   if (error) return <Box>No Tours</Box>;
-  if (tours.length === 0) return <Box>No Tours</Box>;
+  if (!data || !data.data || data.data.length === 0) return <Box>No Tours</Box>;
+
+  const tours: TourType[] = data.data;
 
   return (
     <SectionWrapper>

@@ -13,33 +13,17 @@ import StyledText from '../StyledText';
 import Itenerary from './Itenerary';
 import { IteneraryType } from '../../types/itenerary';
 import LoadingSpinner from '../LoadingSpinner';
+import useFetch from '../../hooks/useFetch';
 
 export default function TourDetail() {
   const { tourId } = useParams();
-  const [tour, setTour] = useState<TourType>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${process.env.REACT_APP_API_URI}/tours/${tourId}`)
-    .then(res => {
-      if (!res.ok) throw new Error('failed to fetch tours');
-      return res.json();
-    })
-    .then((data: {success: Boolean, data: TourType}) => {
-      setTour(data.data);
-      setLoading(false);
-    })
-    .catch(err => {    
-      setError(err);
-      setLoading(false);
-    });
-  }, [tourId]);
+  const { data, loading, error } = useFetch({ pathname: `tours/${tourId}` });
 
   if (loading) return <LoadingSpinner />;
   if (error) return <Box>No Tour</Box>;
-  if (!tour) return <Box>Loading...</Box>
+  if (!data || !data.data || data.data.length === 0) return <Box>Loading...</Box>
+
+  const tour: TourType = data.data;
 
   return (
     <SectionWrapper bgColor='beige' >

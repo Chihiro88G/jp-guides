@@ -1,42 +1,20 @@
-import { useEffect, useState } from 'react';
-import { Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { TourType } from '../../types/tours';
 import Title from '../Title';
 import TourCard from '../TourCard';
 import SectionWrapper from '../SectionWrapper';
 import TourCards from '../TourCards';
 import LoadingSpinner from '../LoadingSpinner';
+import useFetch from '../../hooks/useFetch';
 
 export default function PopularTours() {
-  const [items, setItems] = useState<TourType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${process.env.REACT_APP_API_URI}/tours?popular=true`)
-    
-    // returns Promise<Response>
-    // only rejects on network failure or if anything prevented the request from completing
-    .then(res => {
-      if (!res.ok) throw new Error('failed to fetch tours');
-      return res.json();
-    })
-    .then((responseData: { success: boolean; data: TourType[] }) => {
-      setItems(responseData.data);
-      setLoading(false);
-    })
-    // In a Promise chain, the catch block is only invoked 
-    // if a Promise in the chain is rejected or if an error is thrown.
-    .catch(err => {    
-      setError(err);
-      setLoading(false);
-    });
-  }, []);
+  const { data, loading, error } = useFetch({ pathname: 'tours?popular=true' });
 
   if (loading) return <LoadingSpinner />;
-  if (error) return null;
-  if (items.length === 0) return null;
+  if (error) return <Box>No Popular Tours</Box>;
+  if (!data || !data.data || data.data.length === 0) return null;
+
+  const items: TourType[] = data.data;
 
   return (
     <SectionWrapper height='90vh'>
