@@ -6,13 +6,11 @@ class ToursController {
     const result = req.query.popular
                     ? await service.findPopular()
                     : await service.findAll();
-    // res.send(result);
 
     res.status(200).json({
       success: true,
       data: result,
     });
-
   }
 
   async getOne(req: Request, res: Response, next: NextFunction): Promise<void> {

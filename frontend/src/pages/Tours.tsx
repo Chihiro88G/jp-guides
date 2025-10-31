@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import ToursList from '../components/tours/ToursList';
 import { Box } from '@mui/material';
 import PageTitle from '../components/PageTitle';
@@ -6,6 +6,9 @@ import SectionWrapper from '../components/SectionWrapper';
 import Selection from '../components/tours/Selection';
 import { getDurations } from '../utils/getDurations';
 import { ActivityLevelsType } from '../types/activityLevels';
+import useFetch from '../hooks/useFetch';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { TourType } from '../types/tours';
 
 export default function Tours() {
   const [query, setQuery] = useState<{
@@ -17,22 +20,21 @@ export default function Tours() {
     activityLevel: undefined,
     duration: undefined,
   });
-  const [activityLevelsItems, setActivityLevelsItems] = useState<string[]>([]);
-  const [destinationItems, setDestinationItems] = useState<string[]>([]);
 
   const durationItems = getDurations();
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URI}/activity-levels`)
-    .then(res => res.json())
-    .then(data => setActivityLevelsItems(data.map((item: ActivityLevelsType) => item.levelName)));
-  }, []);
+  const { data: toursData, loading: toursLoading, error: toursError } = useFetch({ pathname: 'tours' });
+  const { data: activityLevelsData, loading: activityLevelLoading, error: activitiLevelError } = useFetch({ pathname: 'activity-levels' });
+  const { data: destinationsData, loading: destinationsLoading, error: destinationsError } = useFetch({ pathname: 'destinations' });
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URI}/destinations`)
-    .then(res => res.json())
-    .then(data => setDestinationItems(data.map((item: any) => item.city_name)));
-  }, []);
+  if (toursLoading || activityLevelLoading || destinationsLoading) return <LoadingSpinner />;
+  if (toursError) return <Box>No Tours</Box>;
+  if (activitiLevelError) return <Box>No Activity Levels</Box>;
+  if (destinationsError) return <Box>No Destinations</Box>;
+
+  const tours: TourType[] = toursData.data;
+  const activityLevelsItems = activityLevelsData.data.map((item: ActivityLevelsType) => item.levelName);
+  const destinationItems = destinationsData.data.map((item: any) => item.city_name);
 
   const handleDestinationChange = (destination: string) => {
     if (query.destination !== destination) {
@@ -76,7 +78,7 @@ export default function Tours() {
           <Selection label='Activity level' items={activityLevelsItems}  onChange={handleActivityLevelChange} value={query.activityLevel} />
         </Box>
       </SectionWrapper>
-      <ToursList query={query} />
+      <ToursList query={query} tours={tours} />
     </Fragment>
   )
 }
